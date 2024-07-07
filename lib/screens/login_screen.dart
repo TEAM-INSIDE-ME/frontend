@@ -158,10 +158,11 @@ class LoginBtn extends StatelessWidget {
                 child: Text(
                   '$snsName 로그인',
                   style: TextStyle(
-                      color: txtColor,
-                      fontSize: 13,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w600),
+                    color: txtColor,
+                    fontSize: 13,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
