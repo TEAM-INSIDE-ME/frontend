@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:flutter_naver_login/flutter_naver_login.dart';
+import 'package:frontend/screens/success.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -130,20 +132,29 @@ class LoginBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Container(
-        width: 280,
-        height: 53,
-        decoration: BoxDecoration(
-          color: btnColor,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: InkWell(
+        onTap: () {
+          path == 'kakao'
+              ? null
+              : path == 'naver'
+                  ? signInWithNaver(context)
+                  : path == 'google'
+                      ? null
+                      : null;
+        },
+        borderRadius: BorderRadius.circular(100),
+        child: Ink(
+          width: 280,
+          height: 53,
+          decoration: BoxDecoration(
+            color: btnColor,
+            borderRadius: BorderRadius.circular(100),
+          ),
           child: Row(
             children: [
               const SizedBox(
-                width: 6,
+                width: 20,
               ),
               Image.asset(
                 'assets/icons/$path.png',
@@ -171,4 +182,24 @@ class LoginBtn extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> signInWithNaver(BuildContext context) async {
+  final NaverLoginResult result = await FlutterNaverLogin.logIn();
+  NaverAccessToken res = await FlutterNaverLogin.currentAccessToken;
+
+  //setState(() {
+  var accesToken = res.accessToken;
+  var tokenType = res.tokenType;
+  //});
+
+  print("accessToken : $accesToken");
+  print("tokenType: $tokenType");
+
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const SuccessScreen()));
+}
+
+Future<void> naverlogout() async {
+  FlutterNaverLogin.logOut().then((value) => {print("logout successful")});
 }
