@@ -27,7 +27,10 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<!-- naver login -->
 				<string>insidemeurlscheme</string>
+				<!-- google login -->
+				<string>com.googleusercontent.apps.265767839365-1kg0frsr8ug382vka9dj7vhbsn5mr5oa</string>
 			</array>
 		</dict>
 	</array>
@@ -91,6 +94,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-
+	<key>FLTEnableImpeller</key>
+	<false />
 </dict>
 </plist>

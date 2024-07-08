@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:frontend/screens/success.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -140,7 +141,7 @@ class LoginBtn extends StatelessWidget {
               : path == 'naver'
                   ? signInWithNaver(context)
                   : path == 'google'
-                      ? null
+                      ? signInWithGoogle(context)
                       : null;
         },
         borderRadius: BorderRadius.circular(100),
@@ -202,4 +203,17 @@ Future<void> signInWithNaver(BuildContext context) async {
 
 Future<void> naverlogout() async {
   FlutterNaverLogin.logOut().then((value) => {print("logout successful")});
+}
+
+Future<void> signInWithGoogle(BuildContext context) async {
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  if (googleUser != null) {
+    print("name = ${googleUser.displayName}");
+    print("email = ${googleUser.email}");
+    print("id = ${googleUser.id}");
+  }
+
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const SuccessScreen()));
 }
