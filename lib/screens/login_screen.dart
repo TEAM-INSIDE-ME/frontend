@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -137,7 +141,7 @@ class LoginBtn extends StatelessWidget {
       child: InkWell(
         onTap: () {
           path == 'kakao'
-              ? null
+              ? signInWithKakao(context)
               : path == 'naver'
                   ? signInWithNaver(context)
                   : path == 'google'
@@ -182,6 +186,31 @@ class LoginBtn extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> signInWithKakao(BuildContext context) async {
+  try {
+    bool isInstalled = await isKakaoTalkInstalled();
+    print(isInstalled);
+
+    OAuthToken token = isInstalled
+        ? await UserApi.instance.loginWithKakaoTalk()
+        : await UserApi.instance.loginWithKakaoAccount();
+
+    final url = Uri.https('kapi.kakao.com', '/v2/user/me');
+    final response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer${token.accessToken}'},
+    );
+
+    final profileInfo = json.decode(response.body);
+    print(profileInfo.toString());
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const SuccessScreen()));
+  } catch (error) {
+    print("카카오톡 로그인 실패 $error");
   }
 }
 

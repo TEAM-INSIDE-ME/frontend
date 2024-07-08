@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/login_screen.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {
+  KakaoSdk.init(
+    nativeAppKey: '6580f8850b25238e4d11ec09072d8b96',
+    javaScriptAppKey: '256ccb709d41bc1d8d1453141e7600ca',
+  );
   runApp(const InsideMe());
 }
 

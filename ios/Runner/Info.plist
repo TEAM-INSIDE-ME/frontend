@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -27,28 +29,32 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- naver login -->
+				<string>6580f8850b25238e4d11ec09072d8b96</string>
 				<string>insidemeurlscheme</string>
-				<!-- google login -->
 				<string>com.googleusercontent.apps.265767839365-1kg0frsr8ug382vka9dj7vhbsn5mr5oa</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao6580f8850b25238e4d11ec09072d8b96</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FLTEnableImpeller</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
+		<string>kakaoplus</string>
 	</array>
-	<key>naverServiceAppUrlScheme</key>
-	<string>insidemeurlscheme</string>
-	<key>naverConsumerKey</key>
-	<string>cCog9KroFM6WE9QiG5jK</string>
-	<key>naverConsumerSecret</key>
-	<string>okIYhg97NH</string>
-	<key>naverServiceAppName</key>
-	<string>INSIDEME</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -73,6 +79,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -90,11 +98,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>FLTEnableImpeller</key>
-	<false />
+	<key>naverConsumerKey</key>
+	<string>cCog9KroFM6WE9QiG5jK</string>
+	<key>naverConsumerSecret</key>
+	<string>okIYhg97NH</string>
+	<key>naverServiceAppName</key>
+	<string>INSIDEME</string>
+	<key>naverServiceAppUrlScheme</key>
+	<string>insidemeurlscheme</string>
 </dict>
 </plist>
