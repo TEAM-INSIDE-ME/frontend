@@ -38,80 +38,111 @@ class LoginScreen extends StatelessWidget {
           ),
           Center(
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 151,
+                Flexible(
+                  flex: 1772,
+                  child: Container(),
                 ),
-                SizedBox(
-                  height: 22,
-                  child: Text(
-                    "내 안의 이야기,나를 찾는 곳",
-                    style: TextStyle(
-                      color: sub1,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
+                Flexible(
+                  flex: 962,
+                  child: Column(
+                    children: [
+                      Flexible(
+                        flex: 2682,
+                        fit: FlexFit.tight,
+                        child: Text(
+                          "내 안의 이야기,나를 찾는 곳",
+                          style: TextStyle(
+                            color: sub1,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 833,
+                        child: Container(),
+                      ),
+                      Flexible(
+                        flex: 5853,
+                        fit: FlexFit.tight,
+                        child: Text(
+                          "Inside Me",
+                          style: TextStyle(
+                            color: sub2,
+                            fontFamily: 'Marine',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 42,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 3814,
+                  child: Column(
+                    children: [
+                      Flexible(
+                        flex: 1230,
+                        child: Container(),
+                      ),
+                      Flexible(
+                        flex: 5846,
+                        fit: FlexFit.tight,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          height: 190,
+                          width: 190,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2923,
+                        child: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 2500,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    child: const Column(
+                      children: [
+                        Text(
+                          'SNS로 간편하게 로그인하세요',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 150, 154, 173),
+                            fontSize: 12,
+                            fontFamily: 'Pretendarad',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        LoginBtn(
+                          path: 'kakao',
+                          snsName: '카카오',
+                          btnColor: Color.fromARGB(255, 253, 239, 171),
+                          txtColor: Color.fromARGB(255, 74, 61, 3),
+                        ),
+                        LoginBtn(
+                          path: 'naver',
+                          snsName: '네이버',
+                          btnColor: Color.fromARGB(255, 211, 237, 200),
+                          txtColor: Color.fromARGB(255, 63, 86, 52),
+                        ),
+                        LoginBtn(
+                          path: 'google',
+                          snsName: '구글',
+                          btnColor: Color.fromARGB(255, 209, 216, 251),
+                          txtColor: Color.fromARGB(255, 60, 65, 92),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Text(
-                    "Inside Me",
-                    style: TextStyle(
-                      color: sub2,
-                      fontFamily: 'Marine',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 42,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 34,
-                ),
-                Image.asset(
-                  'assets/images/logo.png',
-                  height: 190,
-                  width: 190,
-                ),
-                const SizedBox(
-                  height: 95,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(1.0),
-                  child: Text(
-                    'SNS로 간편하게 로그인하세요',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 150, 154, 173),
-                      fontSize: 12,
-                      fontFamily: 'Pretendarad',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const LoginBtn(
-                  path: 'kakao',
-                  snsName: '카카오',
-                  btnColor: Color.fromARGB(255, 253, 239, 171),
-                  txtColor: Color.fromARGB(255, 74, 61, 3),
-                ),
-                const LoginBtn(
-                  path: 'naver',
-                  snsName: '네이버',
-                  btnColor: Color.fromARGB(255, 211, 237, 200),
-                  txtColor: Color.fromARGB(255, 63, 86, 52),
-                ),
-                const LoginBtn(
-                  path: 'google',
-                  snsName: '구글',
-                  btnColor: Color.fromARGB(255, 209, 216, 251),
-                  txtColor: Color.fromARGB(255, 60, 65, 92),
+                Flexible(
+                  flex: 798,
+                  child: Container(),
                 ),
               ],
             ),
@@ -136,52 +167,57 @@ class LoginBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width * 0.7124;
+    double height = MediaQuery.of(context).size.height * 0.0622;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: InkWell(
-        onTap: () {
-          path == 'kakao'
-              ? signInWithKakao(context)
-              : path == 'naver'
-                  ? signInWithNaver(context)
-                  : path == 'google'
-                      ? signInWithGoogle(context)
-                      : null;
-        },
-        borderRadius: BorderRadius.circular(100),
-        child: Ink(
-          width: 280,
-          height: 53,
-          decoration: BoxDecoration(
-            color: btnColor,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 20,
-              ),
-              Image.asset(
-                'assets/icons/$path.png',
-                height: 19,
-                width: 17,
-              ),
-              const SizedBox(width: 63),
-              Container(
-                alignment: Alignment.center,
-                width: 74,
-                height: 17,
-                child: Text(
-                  '$snsName 로그인',
-                  style: TextStyle(
-                    color: txtColor,
-                    fontSize: 13,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w600,
+      padding: EdgeInsets.only(top: height * 0.2264),
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: InkWell(
+          onTap: () {
+            path == 'kakao'
+                ? signInWithKakao(context)
+                : path == 'naver'
+                    ? signInWithNaver(context)
+                    : path == 'google'
+                        ? signInWithGoogle(context)
+                        : null;
+          },
+          borderRadius: BorderRadius.circular(100),
+          child: Ink(
+            decoration: BoxDecoration(
+              color: btnColor,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: width * 0.0714,
+                ),
+                Image.asset(
+                  'assets/icons/$path.png',
+                  height: height * 0.3584,
+                  width: width * 0.0607,
+                ),
+                SizedBox(width: width * 0.225),
+                Container(
+                  alignment: Alignment.center,
+                  width: width * 0.2642,
+                  height: height * 0.3207,
+                  child: Text(
+                    '$snsName 로그인',
+                    style: TextStyle(
+                      color: txtColor,
+                      fontSize: 13,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -215,23 +251,24 @@ Future<void> signInWithKakao(BuildContext context) async {
 }
 
 Future<void> signInWithNaver(BuildContext context) async {
-  final NaverLoginResult result = await FlutterNaverLogin.logIn();
-  NaverAccessToken res = await FlutterNaverLogin.currentAccessToken;
+  NaverLoginResult result = await FlutterNaverLogin.logIn();
+
+  NaverAccessToken naverAccessToken =
+      await FlutterNaverLogin.currentAccessToken;
 
   //setState(() {
-  var accesToken = res.accessToken;
-  var tokenType = res.tokenType;
+  var accesToken = naverAccessToken.accessToken;
+  var tokenType = naverAccessToken.tokenType;
   //});
-
-  print("accessToken : $accesToken");
-  print("tokenType: $tokenType");
 
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => const SuccessScreen()));
 }
 
 Future<void> naverlogout() async {
-  FlutterNaverLogin.logOut().then((value) => {print("logout successful")});
+  try {
+    await FlutterNaverLogin.logOutAndDeleteToken();
+  } catch (error) {}
 }
 
 Future<void> signInWithGoogle(BuildContext context) async {

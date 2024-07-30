@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/login_screen.dart';
+import 'package:frontend/screens/profileName.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {

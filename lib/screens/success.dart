@@ -20,7 +20,12 @@ class SuccessScreen extends StatelessWidget {
         ),
       ),
       body: const Center(
-        child: Text('Login Success!!'),
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: TextField(
+            keyboardType: TextInputType.phone,
+          ),
+        ),
       ),
     );
   }
