@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend/components/buttons.dart';
+import 'package:frontend/components/profile_body.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/profileGender.dart';
-import 'package:frontend/widgets/profileScaffold.dart';
+import 'package:frontend/components/buttons.dart';
 
-class ProfileNameScreen extends StatefulWidget {
-  const ProfileNameScreen({super.key});
+class ProfileName extends StatefulWidget {
+  VoidCallback onTap;
+
+  ProfileName({
+    super.key,
+    required this.onTap,
+  });
 
   @override
-  State<ProfileNameScreen> createState() => _ProfileNameScreenState();
+  State<ProfileName> createState() => _ProfileNameState();
 }
 
-class _ProfileNameScreenState extends State<ProfileNameScreen> {
+class _ProfileNameState extends State<ProfileName> {
   final FocusNode _focusNode = FocusNode();
   bool _isFocused = false;
   String _counterText = "0";
@@ -41,8 +45,7 @@ class _ProfileNameScreenState extends State<ProfileNameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileScaffold(
-      order: 0,
+    return Body(
       message: '안녕하세요 :)\n나의 이름을 적어주세요',
       firstContent: Column(
         children: [
@@ -91,9 +94,7 @@ class _ProfileNameScreenState extends State<ProfileNameScreen> {
         ],
       ),
       secondContent: NextButton(
-        page: ProfileGenderScreen(
-          name: textContent,
-        ),
+        onTap: widget.onTap,
         isfilled: textContent == "",
       ),
     );

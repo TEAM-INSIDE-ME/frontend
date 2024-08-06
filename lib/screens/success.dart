@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/loginScreen.dart';
+import 'package:frontend/screens/login_screen.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({super.key});
@@ -40,7 +40,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       index = 1;
                     });
                   },
-                  child: NextButton(page: const LoginScreen(), isfilled: false),
+                  child: NextButton(
+                    isfilled: false,
+                    onTap: () {},
+                  ),
                 ),
               )
             : index == 1

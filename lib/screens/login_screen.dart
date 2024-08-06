@@ -240,14 +240,17 @@ Future<void> signInWithKakao(BuildContext context) async {
       headers: {HttpHeaders.authorizationHeader: 'Bearer${token.accessToken}'},
     );
 
-    final profileInfo = json.decode(response.body);
-    print(profileInfo.toString());
+    User user = await UserApi.instance.me();
+    print('${user.kakaoAccount}');
+
+    //final profileInfo = json.decode(response.body);
+    //print(profileInfo.toString());
+    print('카카오 로그인 성공!');
 
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const SuccessScreen()));
   } catch (error) {
     print("카카오톡 로그인 실패 $error");
-    print(await KakaoSdk.origin);
   }
 }
 

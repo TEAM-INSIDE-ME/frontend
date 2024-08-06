@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:frontend/components/profile_body.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/test/profileScreen.dart';
 import 'package:frontend/components/buttons.dart';
 
-class Birth extends StatefulWidget {
-  final onTap;
+class ProfileBirth extends StatefulWidget {
+  VoidCallback onTap;
   String name;
 
-  Birth({
+  ProfileBirth({
     super.key,
     required this.onTap,
     required this.name,
   });
 
   @override
-  State<Birth> createState() => _BirthState();
+  State<ProfileBirth> createState() => _BirthState();
 }
 
-class _BirthState extends State<Birth> {
+class _BirthState extends State<ProfileBirth> {
   int? _value = 2;
   List<String> genders = ['여성', '남성'];
   DateTime _selectedDate = DateTime.now();
@@ -34,9 +34,7 @@ class _BirthState extends State<Birth> {
         children: [
           Flexible(
             flex: 26,
-            child: Container(
-              color: emYellow,
-            ),
+            child: Container(),
           ),
           Flexible(
             flex: 125,
@@ -147,13 +145,11 @@ class _BirthState extends State<Birth> {
           ),
           Flexible(
             flex: 200,
-            child: Container(
-              color: emGreen,
-            ),
+            child: Container(),
           ),
         ],
       ),
-      secondContent: NextButton1(
+      secondContent: NextButton(
         onTap: widget.onTap,
         isfilled: _value != 0 && _value != 1,
       ),
