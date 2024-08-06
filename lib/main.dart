@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/login_screen.dart';
+import 'package:frontend/screens/loginScreen.dart';
 import 'package:frontend/screens/profileName.dart';
+import 'package:frontend/screens/success.dart';
+import 'package:frontend/test/profileScreen.dart';
+import 'package:frontend/widgets/profileScaffold.dart';
+import 'package:frontend/test/profileScreen.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {
@@ -25,7 +29,7 @@ class InsideMe extends StatelessWidget {
       ),
 
       themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
-      home: const LoginScreen(),
+      home: const ProfileNameScreen(),
     );
   }
 }

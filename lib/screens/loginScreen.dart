@@ -247,6 +247,7 @@ Future<void> signInWithKakao(BuildContext context) async {
         MaterialPageRoute(builder: (context) => const SuccessScreen()));
   } catch (error) {
     print("카카오톡 로그인 실패 $error");
+    print(await KakaoSdk.origin);
   }
 }
 

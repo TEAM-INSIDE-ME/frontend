@@ -1,26 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:frontend/components/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/profileBirth.dart';
-import 'package:frontend/screens/profileName.dart';
-import 'package:frontend/screens/success.dart';
-import 'package:frontend/widgets/profileScaffold.dart';
+import 'package:frontend/test/profileScreen.dart';
+import 'package:frontend/components/buttons.dart';
 
-class ProfileGenderScreen extends StatefulWidget {
+class Birth extends StatefulWidget {
+  final onTap;
   String name;
-  ProfileGenderScreen({
+
+  Birth({
     super.key,
+    required this.onTap,
     required this.name,
   });
 
   @override
-  State<ProfileGenderScreen> createState() => _ProfileGenderScreenState();
+  State<Birth> createState() => _BirthState();
 }
 
-class _ProfileGenderScreenState extends State<ProfileGenderScreen> {
+class _BirthState extends State<Birth> {
   int? _value = 2;
   List<String> genders = ['여성', '남성'];
   DateTime _selectedDate = DateTime.now();
@@ -30,8 +28,7 @@ class _ProfileGenderScreenState extends State<ProfileGenderScreen> {
     final double height = MediaQuery.of(context).size.height / 852;
     final double width = MediaQuery.of(context).size.width / 393;
 
-    return ProfileScaffold(
-      order: 1,
+    return Body(
       message: '${widget.name} 님에 대해\n알고 싶어요!',
       firstContent: Column(
         children: [
@@ -156,8 +153,8 @@ class _ProfileGenderScreenState extends State<ProfileGenderScreen> {
           ),
         ],
       ),
-      secondContent: NextButton(
-        page: const ProfileBirthScreen(),
+      secondContent: NextButton1(
+        onTap: widget.onTap,
         isfilled: _value != 0 && _value != 1,
       ),
     );
