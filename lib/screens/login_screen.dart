@@ -234,21 +234,28 @@ Future<void> signInWithKakao(BuildContext context) async {
         ? await UserApi.instance.loginWithKakaoTalk()
         : await UserApi.instance.loginWithKakaoAccount();
 
-    final url = Uri.https('kapi.kakao.com', '/v2/user/me');
-    final response = await http.get(
+    final url = Uri.parse('http://10.0.2.2:8080/api/user/kakao');
+
+     final headers = {
+      HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}',
+      if (token.refreshToken != null) 'X-Refresh-Token': token.refreshToken!,
+    };
+
+    final response = await http.post(
       url,
-      headers: {HttpHeaders.authorizationHeader: 'Bearer${token.accessToken}'},
+      headers: headers,
     );
+    
+    if (response.statusCode == 200) {
+      User user = await UserApi.instance.me();
+      print('${user.kakaoAccount}');
+      print('카카오 로그인 성공!');
 
-    User user = await UserApi.instance.me();
-    print('${user.kakaoAccount}');
-
-    //final profileInfo = json.decode(response.body);
-    //print(profileInfo.toString());
-    print('카카오 로그인 성공!');
-
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SuccessScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const SuccessScreen()));
+    } else {
+      print('서버 응답 오류: ${response.statusCode}');
+    }
   } catch (error) {
     print("카카오톡 로그인 실패 $error");
   }
