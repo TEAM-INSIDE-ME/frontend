@@ -62,17 +62,19 @@ class NextButton extends StatelessWidget {
       width: width * 329,
       height: height * 64,
       child: InkWell(
-        onTap: onTap,
+        onTap: isfilled ? onTap : null,
         highlightColor: primary,
         borderRadius: BorderRadius.circular(100),
         child: Ink(
           decoration: isfilled
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: const Color.fromARGB(127, 197, 207, 255),
+                  color: primary,
                 )
               : BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), color: primary),
+                  borderRadius: BorderRadius.circular(100),
+                  color: selectedBg,
+                ),
           child: const Center(
             child: Text(
               '다음',

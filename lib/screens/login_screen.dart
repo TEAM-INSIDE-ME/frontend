@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                         child: Text(
                           "내 안의 이야기,나를 찾는 곳",
                           style: TextStyle(
-                            color: sub1,
+                            color: sub2,
                             fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
@@ -228,7 +228,7 @@ class LoginBtn extends StatelessWidget {
 Future<void> signInWithKakao(BuildContext context) async {
   try {
     bool isInstalled = await isKakaoTalkInstalled();
-    print(isInstalled);
+    //print(isInstalled);
 
     OAuthToken token = isInstalled
         ? await UserApi.instance.loginWithKakaoTalk()
@@ -236,7 +236,7 @@ Future<void> signInWithKakao(BuildContext context) async {
 
     final url = Uri.parse('http://10.0.2.2:8080/api/user/kakao');
 
-     final headers = {
+    final headers = {
       HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}',
       if (token.refreshToken != null) 'X-Refresh-Token': token.refreshToken!,
     };
@@ -245,7 +245,7 @@ Future<void> signInWithKakao(BuildContext context) async {
       url,
       headers: headers,
     );
-    
+
     if (response.statusCode == 200) {
       User user = await UserApi.instance.me();
       print('${user.kakaoAccount}');

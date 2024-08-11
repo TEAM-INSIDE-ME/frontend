@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Orb extends StatelessWidget {
   Color color;
@@ -20,8 +21,10 @@ class Orb extends StatelessWidget {
 }
 
 class OrbBackground extends StatelessWidget {
-  const OrbBackground({
+  Widget marble;
+  OrbBackground({
     super.key,
+    required this.marble,
   });
 
   @override
@@ -32,7 +35,7 @@ class OrbBackground extends StatelessWidget {
         height: 38,
         width: 38,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(100),
           boxShadow: const <BoxShadow>[
             BoxShadow(
@@ -43,6 +46,13 @@ class OrbBackground extends StatelessWidget {
                 blurStyle: BlurStyle.inner),
           ],
         ),
+        // child: Image.asset(
+        //   'assets/images/marbles/green_marble.png',
+        //   height: 150,
+        //   width: 150,
+        // ),
+        //child: SvgPicture.asset('assets/images/marbles/green_marble.svg'),
+        child: marble,
       ),
     );
   }

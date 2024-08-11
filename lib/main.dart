@@ -3,7 +3,9 @@ import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profile_screen.dart';
+import 'package:frontend/utils/info_provider.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   KakaoSdk.init(
@@ -18,15 +20,18 @@ class InsideMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Inside Me',
-      theme: ThemeData(
-        scaffoldBackgroundColor: bg,
-        fontFamily: 'Pretendard',
-      ),
+    return ChangeNotifierProvider(
+      create: (context) => InfoProvider(),
+      child: MaterialApp(
+        title: 'Inside Me',
+        theme: ThemeData(
+          scaffoldBackgroundColor: bg,
+          fontFamily: 'Pretendard',
+        ),
 
-      themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
-      home: const ProfileScreen(),
+        themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
+        home: const ProfileScreen(),
+      ),
     );
   }
 }

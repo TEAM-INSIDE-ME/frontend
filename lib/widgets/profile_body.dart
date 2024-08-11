@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/models/colors.dart';
@@ -39,13 +40,16 @@ class _BodyState extends State<Body> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  widget.message,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: sub1,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    widget.message,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: sub2,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24,
+                    ),
                   ),
                 ),
               ],

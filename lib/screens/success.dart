@@ -27,7 +27,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
               Navigator.pop(context);
             },
           ),
-          backgroundColor: sub1,
+          backgroundColor: sub2,
         ),
         body: index == 0
             ? Container(

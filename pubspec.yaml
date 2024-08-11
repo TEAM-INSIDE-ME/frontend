@@ -35,6 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_svg: ^2.0.10+1
+  provider: ^6.1.2
   #login
   flutter_naver_login: ^1.8.0
   google_sign_in: ^6.2.1
@@ -65,12 +67,21 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
-    - assets/images/ob.png
-    - assets/images/ob_p.png
+    #background
     - assets/images/blue_bg.png
     - assets/images/red_bg.png
     - assets/images/green_bg.png
     - assets/images/yellow_bg.png
+    #marbles
+    - assets/images/marbles/red_marble.png
+    - assets/images/marbles/orange_marble.png
+    - assets/images/marbles/yellow_marble.png
+    - assets/images/marbles/green_marble.png
+    - assets/images/marbles/green_marble.svg
+    - assets/images/marbles/blue_marble.png
+    - assets/images/marbles/navy_marble.jpeg
+    - assets/images/marbles/purple_marble.png
+    #icons
     - assets/icons/kakao.png
     - assets/icons/naver.png
     - assets/icons/google.png

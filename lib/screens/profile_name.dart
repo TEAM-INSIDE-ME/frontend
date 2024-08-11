@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend/components/profile_body.dart';
+import 'package:frontend/utils/info_provider.dart';
+import 'package:frontend/widgets/profile_body.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/components/buttons.dart';
+import 'package:provider/provider.dart';
 
 class ProfileName extends StatefulWidget {
   VoidCallback onTap;
@@ -95,12 +97,14 @@ class _ProfileNameState extends State<ProfileName> {
       ),
       secondContent: NextButton(
         onTap: widget.onTap,
-        isfilled: textContent == "",
+        isfilled: textContent != "",
       ),
     );
   }
 
   TextField nameField() {
+    final textProvider = Provider.of<InfoProvider>(context);
+
     return TextField(
       controller: textController,
       focusNode: _focusNode,
@@ -154,6 +158,7 @@ class _ProfileNameState extends State<ProfileName> {
         setState(() {
           _counterText = (value.length).toString();
           textContent = textController.text;
+          textProvider.getName(value);
           if (value.isEmpty) {
             errorTextVal = 'min';
           } else {
