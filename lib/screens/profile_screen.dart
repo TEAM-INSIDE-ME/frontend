@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/profile_frequency.dart';
 import 'package:frontend/screens/profile_job.dart';
 import 'package:frontend/screens/profile_name.dart';
 import 'package:frontend/screens/profile_birth.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/objects.dart';
+import 'package:frontend/screens/profile_password.dart';
 import 'package:frontend/screens/profile_reason.dart';
+import 'package:frontend/screens/profile_reminder.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,11 +22,12 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 0;
-  final int _numPages = 4;
+  final int _numPages = 7;
 
   void _goToNextPage() {
     setState(() {
       _selectedIndex = (_selectedIndex + 1) % _numPages;
+      print(_selectedIndex);
     });
     _pageController.animateToPage(
       _selectedIndex,
@@ -164,6 +168,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: _goToNextPage,
             ),
             ProfileReason(
+              onTap: _goToNextPage,
+            ),
+            ProfileReminder(
+              onTap: _goToNextPage,
+            ),
+            ProfileFreq(
+              onTap: _goToNextPage,
+            ),
+            ProfilePassword(
               onTap: _goToNextPage,
             ),
           ],

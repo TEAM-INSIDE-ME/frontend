@@ -44,6 +44,7 @@ class _BodyState extends State<Body> {
                   fit: BoxFit.scaleDown,
                   child: Text(
                     widget.message,
+                    textWidthBasis: TextWidthBasis.parent,
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: sub2,
@@ -64,7 +65,7 @@ class _BodyState extends State<Body> {
           ),
           Flexible(
             flex: 68,
-            fit: FlexFit.loose,
+            fit: FlexFit.tight,
             child: widget.secondContent,
           ),
           Flexible(

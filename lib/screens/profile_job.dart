@@ -121,9 +121,8 @@ class _ProfileJobState extends State<ProfileJob> {
       ),
       secondContent: NextButton(
         isfilled: _filters.isNotEmpty,
-        onTap: () {
-          widget.onTap;
-        },
+        onTap: widget.onTap,
+        index: 0,
       ),
     );
   }

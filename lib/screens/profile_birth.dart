@@ -466,6 +466,7 @@ class _BirthState extends State<ProfileBirth> {
       secondContent: NextButton(
         onTap: widget.onTap,
         isfilled: _value != null,
+        index: 0,
       ),
     );
   }

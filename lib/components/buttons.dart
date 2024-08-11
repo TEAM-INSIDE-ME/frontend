@@ -46,11 +46,13 @@ class BackButtonCustom extends StatelessWidget {
 class NextButton extends StatelessWidget {
   VoidCallback onTap;
   bool isfilled;
+  int index;
 
   NextButton({
     super.key,
     required this.onTap,
     required this.isfilled,
+    required this.index,
   });
 
   @override
@@ -75,10 +77,10 @@ class NextButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   color: selectedBg,
                 ),
-          child: const Center(
+          child: Center(
             child: Text(
-              '다음',
-              style: TextStyle(
+              index == 0 ? '다음' : '인사이드미 시작하기',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,

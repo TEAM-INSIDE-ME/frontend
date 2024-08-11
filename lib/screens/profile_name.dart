@@ -98,6 +98,7 @@ class _ProfileNameState extends State<ProfileName> {
       secondContent: NextButton(
         onTap: widget.onTap,
         isfilled: textContent != "",
+        index: 0,
       ),
     );
   }

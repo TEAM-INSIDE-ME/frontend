@@ -43,6 +43,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                   child: NextButton(
                     isfilled: false,
                     onTap: () {},
+                    index: 0,
                   ),
                 ),
               )
