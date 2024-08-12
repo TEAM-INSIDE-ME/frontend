@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
@@ -21,22 +22,22 @@ class LoginScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: 20,
+            top: 20 * height,
             left: 0,
             child: Image.asset('assets/images/green_bg.png'),
           ),
           Positioned(
-            top: 30,
+            top: 30 * height,
             right: 0,
             child: Image.asset('assets/images/red_bg.png'),
           ),
           Positioned(
-            top: 180,
+            top: 180 * height,
             left: 0,
             child: Image.asset('assets/images/blue_bg.png'),
           ),
           Positioned(
-            top: 280,
+            top: 280 * height,
             right: 0,
             child: Image.asset('assets/images/yellow_bg.png'),
           ),
@@ -44,31 +45,31 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Flexible(
-                  flex: 1772,
+                  flex: 151,
                   child: Container(),
                 ),
                 Flexible(
-                  flex: 962,
+                  flex: 82,
                   child: Column(
                     children: [
                       Flexible(
-                        flex: 2682,
+                        flex: 22,
                         fit: FlexFit.tight,
                         child: Text(
                           "내 안의 이야기,나를 찾는 곳",
                           style: TextStyle(
                             color: sub2,
                             fontWeight: FontWeight.w700,
-                            fontSize: 18,
+                            fontSize: 18 * height,
                           ),
                         ),
                       ),
                       Flexible(
-                        flex: 833,
+                        flex: 12,
                         child: Container(),
                       ),
                       Flexible(
-                        flex: 5853,
+                        flex: 48,
                         fit: FlexFit.tight,
                         child: Text(
                           "Inside Me",
@@ -76,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                             color: sub2,
                             fontFamily: 'Marine',
                             fontWeight: FontWeight.w700,
-                            fontSize: 42,
+                            fontSize: 42 * height,
                           ),
                         ),
                       ),
@@ -84,210 +85,75 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                  flex: 3814,
+                  flex: 325,
                   child: Column(
                     children: [
                       Flexible(
-                        flex: 1230,
+                        flex: 40,
                         child: Container(),
                       ),
                       Flexible(
-                        flex: 5846,
+                        flex: 190,
                         fit: FlexFit.tight,
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: 190,
-                          width: 190,
+                          height: 190 * height,
+                          width: 190 * width,
                         ),
                       ),
                       Flexible(
-                        flex: 2923,
+                        flex: 95,
                         child: Container(),
                       ),
                     ],
                   ),
                 ),
                 Flexible(
-                  flex: 2500,
+                  flex: 213,
                   fit: FlexFit.tight,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        const Text(
-                          'SNS로 간편하게 로그인하세요',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 150, 154, 173),
-                            fontSize: 12,
-                            fontFamily: 'Pretendarad',
-                            fontWeight: FontWeight.w400,
-                          ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'SNS로 간편하게 로그인하세요',
+                        style: TextStyle(
+                          color: const Color.fromARGB(255, 150, 154, 173),
+                          fontSize: 12 * height,
+                          fontFamily: 'Pretendarad',
+                          fontWeight: FontWeight.w400,
                         ),
-                        LoginBtn1(
-                          path: 'kakao',
-                          snsName: '카카오',
-                          iconData: CustomIcons.kakaotalk_icon,
-                          btnColor: const Color.fromARGB(255, 253, 239, 171),
-                          txtColor: const Color.fromARGB(255, 74, 61, 3),
-                        ),
-                        LoginBtn1(
-                          path: 'naver',
-                          snsName: '네이버',
-                          iconData: CustomIcons.naver_icon,
-                          btnColor: const Color.fromARGB(255, 211, 237, 200),
-                          txtColor: const Color.fromARGB(255, 63, 86, 52),
-                        ),
-                        LoginBtn1(
-                          path: 'google',
-                          snsName: '구글',
-                          iconData: CustomIcons.google_icon,
-                          btnColor: const Color.fromARGB(255, 209, 216, 251),
-                          txtColor: const Color.fromARGB(255, 60, 65, 92),
-                        ),
-                      ],
-                    ),
+                      ),
+                      LoginBtn(
+                        path: 'kakao',
+                        snsName: '카카오',
+                        iconData: CustomIcons.kakaotalk_icon,
+                        btnColor: const Color.fromARGB(255, 253, 239, 171),
+                        txtColor: const Color.fromARGB(255, 74, 61, 3),
+                      ),
+                      LoginBtn(
+                        path: 'naver',
+                        snsName: '네이버',
+                        iconData: CustomIcons.naver_icon,
+                        btnColor: const Color.fromARGB(255, 211, 237, 200),
+                        txtColor: const Color.fromARGB(255, 63, 86, 52),
+                      ),
+                      LoginBtn(
+                        path: 'google',
+                        snsName: '구글',
+                        iconData: CustomIcons.google_icon,
+                        btnColor: const Color.fromARGB(255, 209, 216, 251),
+                        txtColor: const Color.fromARGB(255, 60, 65, 92),
+                      ),
+                    ],
                   ),
                 ),
                 Flexible(
-                  flex: 798,
+                  flex: 68,
                   child: Container(),
                 ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LoginBtn1 extends StatelessWidget {
-  final String path, snsName;
-  final Color btnColor, txtColor;
-  IconData iconData;
-
-  LoginBtn1({
-    super.key,
-    required this.path,
-    required this.snsName,
-    required this.btnColor,
-    required this.txtColor,
-    required this.iconData,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width / 393;
-    final double height = MediaQuery.of(context).size.height / 839;
-
-    return Padding(
-      padding: EdgeInsets.only(top: 12 * height),
-      child: TextButton.icon(
-        onPressed: () {
-          path == 'kakao'
-              ? signInWithKakao(context)
-              : path == 'naver'
-                  ? signInWithNaver(context)
-                  : path == 'google'
-                      ? signInWithGoogle(context)
-                      : null;
-        },
-        icon: Icon(
-          iconData,
-          size: 17 * width,
-          color: txtColor,
-        ),
-        label: Padding(
-          padding: EdgeInsets.only(
-            left: 63 * width,
-          ),
-          child: Text(
-            '$snsName 로그인',
-            style: TextStyle(
-              color: txtColor,
-              fontSize: 13,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        style: TextButton.styleFrom(
-          backgroundColor: btnColor,
-          alignment: Alignment.centerLeft,
-          fixedSize: Size(280 * width, 53 * height),
-          padding: EdgeInsets.only(left: 20 * width),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginBtn extends StatelessWidget {
-  final String path, snsName;
-  final Color btnColor, txtColor;
-  IconData iconData;
-
-  LoginBtn({
-    required this.path,
-    required this.snsName,
-    required this.iconData,
-    required this.btnColor,
-    required this.txtColor,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width / 393;
-    final double height = MediaQuery.of(context).size.height / 839;
-
-    return Padding(
-      padding: EdgeInsets.only(top: 12 * height),
-      child: SizedBox(
-        width: 280 * width,
-        height: 53 * height,
-        child: InkWell(
-          onTap: () {
-            path == 'kakao'
-                ? signInWithKakao(context)
-                : path == 'naver'
-                    ? signInWithNaver(context)
-                    : path == 'google'
-                        ? signInWithGoogle(context)
-                        : null;
-          },
-          borderRadius: BorderRadius.circular(100),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: btnColor,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Row(
-              children: [
-                SizedBox(width: 20 * width),
-                Icon(
-                  iconData,
-                  color: txtColor,
-                  size: 17,
-                ),
-                SizedBox(width: 63 * width),
-                Container(
-                  alignment: Alignment.center,
-                  width: 74 * width,
-                  height: 17 * height,
-                  child: Text(
-                    '$snsName 로그인',
-                    style: TextStyle(
-                      color: txtColor,
-                      fontSize: 13,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

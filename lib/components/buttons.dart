@@ -5,6 +5,68 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/login_screen.dart';
+
+class LoginBtn extends StatelessWidget {
+  final String path, snsName;
+  final Color btnColor, txtColor;
+  IconData iconData;
+
+  LoginBtn({
+    super.key,
+    required this.path,
+    required this.snsName,
+    required this.btnColor,
+    required this.txtColor,
+    required this.iconData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width / 393;
+    final double height = MediaQuery.of(context).size.height / 839;
+
+    return Padding(
+      padding: EdgeInsets.only(top: 12 * height),
+      child: TextButton.icon(
+        onPressed: () {
+          path == 'kakao'
+              ? signInWithKakao(context)
+              : path == 'naver'
+                  ? signInWithNaver(context)
+                  : path == 'google'
+                      ? signInWithGoogle(context)
+                      : null;
+        },
+        icon: Icon(
+          iconData,
+          size: 17 * width,
+          color: txtColor,
+        ),
+        label: Padding(
+          padding: EdgeInsets.only(
+            left: 63 * width,
+          ),
+          child: Text(
+            '$snsName 로그인',
+            style: TextStyle(
+              color: txtColor,
+              fontSize: 13,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        style: TextButton.styleFrom(
+          backgroundColor: btnColor,
+          alignment: Alignment.centerLeft,
+          fixedSize: Size(280 * width, 53 * height),
+          padding: EdgeInsets.only(left: 20 * width),
+        ),
+      ),
+    );
+  }
+}
 
 class BackButtonCustom extends StatelessWidget {
   VoidCallback onTap;
