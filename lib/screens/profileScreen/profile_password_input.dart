@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
+import 'package:frontend/components/custom_icons.dart';
+import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password.dart';
@@ -188,8 +190,9 @@ class _ProfilePasswordInputState extends State<ProfilePasswordInput> {
                                 });
                               },
                               child: Icon(
-                                Icons.arrow_back_sharp,
+                                CustomIcons.back_arrow_icon,
                                 color: sub1,
+                                size: 17,
                               )),
                         ),
                       ],

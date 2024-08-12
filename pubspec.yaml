@@ -133,4 +133,4 @@ flutter:
 
     - family: CustomIcons
       fonts:
-       - asset: assets/fonts/Social-Login-Icons.ttf
+       - asset: assets/fonts/Custom-Icons.ttf
