@@ -190,7 +190,10 @@ class _ProfileReminderState extends State<ProfileReminder> {
             Flexible(
               flex: 37,
               child: Center(
-                child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    showAboutDialog(context: context);
+                  },
                   child: Text(
                     '나중에 설정할래요',
                     style: TextStyle(

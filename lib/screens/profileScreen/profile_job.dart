@@ -17,7 +17,6 @@ class ProfileJob extends StatefulWidget {
 }
 
 class _ProfileJobState extends State<ProfileJob> {
-  final List<String> _filters = [];
   int? _value;
 
   List<String> jobs = [

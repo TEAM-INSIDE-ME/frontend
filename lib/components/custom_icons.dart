@@ -23,6 +23,7 @@ class CustomIcons {
   static const _kFontFam = 'CustomIcons';
   static const String? _kFontPkg = null;
 
+  // Social Login Icons
   static const IconData google_icon =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData kakaotalk_icon =
