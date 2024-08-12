@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/profile_password_setting.dart';
+import 'package:frontend/screens/profileScreen/profile_password_setting.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/widgets/profile_body.dart';
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/profile_frequency.dart';
-import 'package:frontend/screens/profile_job.dart';
-import 'package:frontend/screens/profile_name.dart';
-import 'package:frontend/screens/profile_birth.dart';
+import 'package:frontend/screens/profileScreen/profile_frequency.dart';
+import 'package:frontend/screens/profileScreen/profile_job.dart';
+import 'package:frontend/screens/profileScreen/profile_name.dart';
+import 'package:frontend/screens/profileScreen/profile_birth.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/objects.dart';
-import 'package:frontend/screens/profile_password.dart';
-import 'package:frontend/screens/profile_reason.dart';
-import 'package:frontend/screens/profile_reminder.dart';
+import 'package:frontend/screens/profileScreen/profile_password.dart';
+import 'package:frontend/screens/profileScreen/profile_reason.dart';
+import 'package:frontend/screens/profileScreen/profile_reminder.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: _goToPreviousPage,
                       ),
                 Container(
-                  width: 7,
+                  width: 7 * width,
                 ),
                 Container(
                   height: 48,

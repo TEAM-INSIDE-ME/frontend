@@ -30,7 +30,7 @@ class InsideMe extends StatelessWidget {
         ),
 
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
-        home: const LoginScreen(),
+        home: const ProfileScreen(),
       ),
     );
   }
