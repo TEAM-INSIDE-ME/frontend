@@ -130,3 +130,7 @@ flutter:
           weight: 700
         - asset: assets/fonts/Marine-Black.ttf
           weight: 900
+
+    - family: CustomIcons
+      fonts:
+       - asset: assets/fonts/Social-Login-Icons.ttf

@@ -1,6 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:frontend/screens/success.dart';
@@ -13,6 +14,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width / 393;
+    final double height = MediaQuery.of(context).size.height / 839;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -107,9 +111,9 @@ class LoginScreen extends StatelessWidget {
                   flex: 2500,
                   fit: FlexFit.tight,
                   child: Container(
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'SNS로 간편하게 로그인하세요',
                           style: TextStyle(
                             color: Color.fromARGB(255, 150, 154, 173),
@@ -118,23 +122,26 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        LoginBtn(
+                        LoginBtn1(
                           path: 'kakao',
                           snsName: '카카오',
-                          btnColor: Color.fromARGB(255, 253, 239, 171),
-                          txtColor: Color.fromARGB(255, 74, 61, 3),
+                          iconData: CustomIcons.kakaotalk_icon,
+                          btnColor: const Color.fromARGB(255, 253, 239, 171),
+                          txtColor: const Color.fromARGB(255, 74, 61, 3),
                         ),
-                        LoginBtn(
+                        LoginBtn1(
                           path: 'naver',
                           snsName: '네이버',
-                          btnColor: Color.fromARGB(255, 211, 237, 200),
-                          txtColor: Color.fromARGB(255, 63, 86, 52),
+                          iconData: CustomIcons.naver_icon,
+                          btnColor: const Color.fromARGB(255, 211, 237, 200),
+                          txtColor: const Color.fromARGB(255, 63, 86, 52),
                         ),
-                        LoginBtn(
+                        LoginBtn1(
                           path: 'google',
                           snsName: '구글',
-                          btnColor: Color.fromARGB(255, 209, 216, 251),
-                          txtColor: Color.fromARGB(255, 60, 65, 92),
+                          iconData: CustomIcons.google_icon,
+                          btnColor: const Color.fromARGB(255, 209, 216, 251),
+                          txtColor: const Color.fromARGB(255, 60, 65, 92),
                         ),
                       ],
                     ),
@@ -153,13 +160,76 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+class LoginBtn1 extends StatelessWidget {
+  final String path, snsName;
+  final Color btnColor, txtColor;
+  IconData iconData;
+
+  LoginBtn1({
+    super.key,
+    required this.path,
+    required this.snsName,
+    required this.btnColor,
+    required this.txtColor,
+    required this.iconData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width / 393;
+    final double height = MediaQuery.of(context).size.height / 839;
+
+    return Padding(
+      padding: EdgeInsets.only(top: 12 * height),
+      child: TextButton.icon(
+        onPressed: () {
+          path == 'kakao'
+              ? signInWithKakao(context)
+              : path == 'naver'
+                  ? signInWithNaver(context)
+                  : path == 'google'
+                      ? signInWithGoogle(context)
+                      : null;
+        },
+        icon: Icon(
+          iconData,
+          size: 17 * width,
+          color: txtColor,
+        ),
+        label: Padding(
+          padding: EdgeInsets.only(
+            left: 63 * width,
+          ),
+          child: Text(
+            '$snsName 로그인',
+            style: TextStyle(
+              color: txtColor,
+              fontSize: 13,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        style: TextButton.styleFrom(
+          backgroundColor: btnColor,
+          alignment: Alignment.centerLeft,
+          fixedSize: Size(280 * width, 53 * height),
+          padding: EdgeInsets.only(left: 20 * width),
+        ),
+      ),
+    );
+  }
+}
+
 class LoginBtn extends StatelessWidget {
   final String path, snsName;
   final Color btnColor, txtColor;
+  IconData iconData;
 
-  const LoginBtn({
+  LoginBtn({
     required this.path,
     required this.snsName,
+    required this.iconData,
     required this.btnColor,
     required this.txtColor,
     super.key,
@@ -167,14 +237,14 @@ class LoginBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width * 0.7124;
-    double height = MediaQuery.of(context).size.height * 0.0622;
+    final double width = MediaQuery.of(context).size.width / 393;
+    final double height = MediaQuery.of(context).size.height / 839;
 
     return Padding(
-      padding: EdgeInsets.only(top: height * 0.2264),
+      padding: EdgeInsets.only(top: 12 * height),
       child: SizedBox(
-        width: width,
-        height: height,
+        width: 280 * width,
+        height: 53 * height,
         child: InkWell(
           onTap: () {
             path == 'kakao'
@@ -193,19 +263,17 @@ class LoginBtn extends StatelessWidget {
             ),
             child: Row(
               children: [
-                SizedBox(
-                  width: width * 0.0714,
+                SizedBox(width: 20 * width),
+                Icon(
+                  iconData,
+                  color: txtColor,
+                  size: 17,
                 ),
-                Image.asset(
-                  'assets/icons/$path.png',
-                  height: height * 0.3584,
-                  width: width * 0.0607,
-                ),
-                SizedBox(width: width * 0.225),
+                SizedBox(width: 63 * width),
                 Container(
                   alignment: Alignment.center,
-                  width: width * 0.2642,
-                  height: height * 0.3207,
+                  width: 74 * width,
+                  height: 17 * height,
                   child: Text(
                     '$snsName 로그인',
                     style: TextStyle(
