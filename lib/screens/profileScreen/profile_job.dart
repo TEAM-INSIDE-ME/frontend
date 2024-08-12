@@ -18,6 +18,7 @@ class ProfileJob extends StatefulWidget {
 
 class _ProfileJobState extends State<ProfileJob> {
   final List<String> _filters = [];
+  int? _value;
 
   List<String> jobs = [
     '사무직',
@@ -44,22 +45,25 @@ class _ProfileJobState extends State<ProfileJob> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height / 852;
+    final double width = MediaQuery.of(context).size.width / 393;
+
     return Body(
       message: '\n어떤 일을 하시나요?',
       firstContent: Column(
         children: [
-          const Flexible(
+          Flexible(
             flex: 27,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: EdgeInsets.only(top: 8.0 * height),
                   child: Text(
                     '직업을 선택해 주세요',
                     style: TextStyle(
-                      color: Color.fromRGBO(104, 87, 64, 0.6),
-                      fontSize: 16,
+                      color: const Color.fromRGBO(104, 87, 64, 0.6),
+                      fontSize: 16 * height,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -71,41 +75,34 @@ class _ProfileJobState extends State<ProfileJob> {
             flex: 428,
             fit: FlexFit.tight,
             child: Container(
-              padding: const EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: 30 * height),
               child: Wrap(
-                spacing: 10,
+                spacing: 10 * width,
                 children: List<Widget>.generate(jobs.length, (index) {
-                  return FilterChip(
+                  return ChoiceChip(
                     label: Text(
                       jobs[index],
                       style: TextStyle(
-                        color: _filters.contains(jobs[index]) ? sub1 : sub3,
-                        fontSize: 16,
+                        color: _value == index ? sub1 : sub3,
+                        fontSize: 16 * height,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     selectedColor: selectedBg,
                     backgroundColor: nonSelectedBg,
                     showCheckmark: false,
-                    selected: _filters.contains(jobs[index]),
+                    selected: _value == index,
                     side: BorderSide(
-                      color: _filters.contains(jobs[index])
-                          ? selectedBorder
-                          : nonSelectedBorder,
-                      width: 1,
+                      color:
+                          _value == index ? selectedBorder : nonSelectedBorder,
+                      width: 1 * width,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    onSelected: (bool value) {
+                    onSelected: (bool selected) {
                       setState(() {
-                        if (value) {
-                          _filters.add(jobs[index]);
-                        } else {
-                          _filters.removeWhere((String name) {
-                            return name == jobs[index];
-                          });
-                        }
+                        _value = selected ? index : null;
                       });
                     },
                   );
@@ -120,7 +117,7 @@ class _ProfileJobState extends State<ProfileJob> {
         ],
       ),
       secondContent: NextButton(
-        isfilled: _filters.isNotEmpty,
+        isfilled: _value != null,
         onTap: widget.onTap,
         index: 0,
       ),
