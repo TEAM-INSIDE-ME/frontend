@@ -1,39 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Orb extends StatelessWidget {
-  Color color;
-  Orb({
-    super.key,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/images/ob_p.png',
-      width: 50,
-      height: 50,
-      colorBlendMode: BlendMode.modulate,
-      color: color,
-    );
-  }
-}
-
-class OrbBackground extends StatelessWidget {
+class MarbleBackground extends StatelessWidget {
   Widget marble;
-  OrbBackground({
+
+  MarbleBackground({
     super.key,
     required this.marble,
   });
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width / 393;
+    final double height = MediaQuery.of(context).size.height / 839;
+
     return Padding(
       padding: const EdgeInsets.all(2.5),
       child: Container(
-        height: 38,
-        width: 38,
+        height: 38 * height,
+        width: 38 * width,
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(100),
@@ -46,12 +31,6 @@ class OrbBackground extends StatelessWidget {
                 blurStyle: BlurStyle.inner),
           ],
         ),
-        // child: Image.asset(
-        //   'assets/images/marbles/green_marble.png',
-        //   height: 150,
-        //   width: 150,
-        // ),
-        //child: SvgPicture.asset('assets/images/marbles/green_marble.svg'),
         child: marble,
       ),
     );

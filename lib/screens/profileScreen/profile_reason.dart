@@ -16,7 +16,7 @@ class ProfileReason extends StatefulWidget {
 }
 
 class _ProfileReasonState extends State<ProfileReason> {
-  final List<String> _filters = [];
+  int? _value;
   List<String> reasons = [
     '하루 기록',
     '감정 정리',
@@ -66,7 +66,7 @@ class _ProfileReasonState extends State<ProfileReason> {
                     return SizedBox(
                       width: 329 * width,
                       height: 49 * height,
-                      child: FilterChip(
+                      child: ChoiceChip(
                         padding: const EdgeInsets.only(left: 13),
                         label: Container(
                           width: 329 * width,
@@ -75,9 +75,7 @@ class _ProfileReasonState extends State<ProfileReason> {
                           child: Text(
                             reasons[index],
                             style: TextStyle(
-                              color: _filters.contains(reasons[index])
-                                  ? sub1
-                                  : sub3,
+                              color: _value == index ? sub1 : sub3,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -86,9 +84,9 @@ class _ProfileReasonState extends State<ProfileReason> {
                         selectedColor: selectedBg,
                         backgroundColor: nonSelectedBg,
                         showCheckmark: false,
-                        selected: _filters.contains(reasons[index]),
+                        selected: _value == index,
                         side: BorderSide(
-                          color: _filters.contains(reasons[index])
+                          color: _value == index
                               ? selectedBorder
                               : nonSelectedBorder,
                           width: 1,
@@ -96,15 +94,9 @@ class _ProfileReasonState extends State<ProfileReason> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        onSelected: (bool value) {
+                        onSelected: (bool selected) {
                           setState(() {
-                            if (value) {
-                              _filters.add(reasons[index]);
-                            } else {
-                              _filters.removeWhere((String name) {
-                                return name == reasons[index];
-                              });
-                            }
+                            _value = selected ? index : null;
                           });
                         },
                       ),
@@ -116,7 +108,7 @@ class _ProfileReasonState extends State<ProfileReason> {
           ],
         ),
         secondContent: NextButton(
-          isfilled: _filters.isNotEmpty,
+          isfilled: _value != null,
           onTap: widget.onTap,
           index: 0,
         ));

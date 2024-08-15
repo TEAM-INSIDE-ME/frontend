@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_frequency.dart';
 import 'package:frontend/screens/profileScreen/profile_job.dart';
@@ -95,46 +94,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   child: Row(
                     children: [
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 0
                             ? Image.asset(
-                                'assets/images/marbles/red_marble.png')
+                                'assets/images/marbles/red_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 1
                             ? Image.asset(
-                                'assets/images/marbles/orange_marble.png')
+                                'assets/images/marbles/orange_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 2
                             ? Image.asset(
-                                'assets/images/marbles/yellow_marble.png')
+                                'assets/images/marbles/yellow_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 3
                             ? Image.asset(
-                                'assets/images/marbles/green_marble.png')
+                                'assets/images/marbles/green_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 4
                             ? Image.asset(
-                                'assets/images/marbles/blue_marble.png')
+                                'assets/images/marbles/blue_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 5
                             ? Image.asset(
-                                'assets/images/marbles/navy_marble.jpeg')
+                                'assets/images/marbles/navy_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
-                      OrbBackground(
+                      MarbleBackground(
                         marble: _selectedIndex >= 6
                             ? Image.asset(
-                                'assets/images/marbles/purple_marble.png')
+                                'assets/images/marbles/purple_marble_1.png',
+                                fit: BoxFit.fill,
+                              )
                             : Container(),
                       ),
                     ],
