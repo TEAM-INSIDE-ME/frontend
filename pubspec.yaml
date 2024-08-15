@@ -74,6 +74,7 @@ flutter:
     - assets/images/yellow_bg.png
     #marbles
     - assets/images/marbles/red_marble.png
+    - assets/images/marbles/red_marble.svg
     - assets/images/marbles/orange_marble.png
     - assets/images/marbles/yellow_marble.png
     - assets/images/marbles/green_marble.png

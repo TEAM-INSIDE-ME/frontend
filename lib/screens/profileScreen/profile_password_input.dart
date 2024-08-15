@@ -65,10 +65,11 @@ class _ProfilePasswordInputState extends State<ProfilePasswordInput> {
     final double height = MediaQuery.of(context).size.height / 839;
 
     return Scaffold(
+      backgroundColor: sub5,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(72 * height),
         child: AppBar(
-          backgroundColor: bg,
+          backgroundColor: sub5,
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(72 * height),
@@ -272,10 +273,11 @@ class _ProfilePasswordInputAgainState extends State<ProfilePasswordInputAgain> {
     final double height = MediaQuery.of(context).size.height / 839;
 
     return Scaffold(
+      backgroundColor: sub5,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(72 * height),
         child: AppBar(
-          backgroundColor: bg,
+          backgroundColor: sub5,
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(72 * height),

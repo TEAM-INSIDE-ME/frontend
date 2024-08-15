@@ -23,7 +23,7 @@ class ProfileBirth extends StatefulWidget {
 }
 
 class _BirthState extends State<ProfileBirth> {
-  int? _value = 2;
+  int? _value;
   List<String> genders = ['여성', '남성'];
   var year = 'YYYY', month = 'MM', day = 'DD';
 

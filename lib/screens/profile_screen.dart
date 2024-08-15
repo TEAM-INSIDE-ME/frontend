@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_frequency.dart';
 import 'package:frontend/screens/profileScreen/profile_job.dart';
@@ -62,10 +63,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: bg2,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(72 * height),
         child: AppBar(
-          backgroundColor: bg,
+          backgroundColor: bg2,
           //backgroundColor: const Color.fromRGBO(60, 65, 92, 1),
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
