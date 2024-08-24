@@ -69,28 +69,8 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/marbles/
-    # - assets/images/logo.png
-    # #background
-    # - assets/images/blue_bg.png
-    # - assets/images/red_bg.png
-    # - assets/images/green_bg.png
-    # - assets/images/yellow_bg.png
-    # #marbles
-    # - assets/images/marbles/red_marble.png
-    # - assets/images/marbles/red_marble.svg
-    # - assets/images/marbles/orange_marble.png
-    # - assets/images/marbles/yellow_marble.png
-    # - assets/images/marbles/green_marble.png
-    # - assets/images/marbles/green_marble.svg
-    # - assets/images/marbles/blue_marble.png
-    # - assets/images/marbles/navy_marble.jpeg
-    # - assets/images/marbles/purple_marble.png
-    # - assets/images/marbles/character.svg
-    # #icons
-    # - assets/icons/kakao.png
-    # - assets/icons/naver.png
-    # - assets/icons/google.png
-    
+    - assets/images/background/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -138,4 +118,4 @@ flutter:
 
     - family: CustomIcons
       fonts:
-       - asset: assets/fonts/Custom-Icons.ttf
+        - asset: assets/fonts/Custom-Icons.ttf
