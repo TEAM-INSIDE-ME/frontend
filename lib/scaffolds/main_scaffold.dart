@@ -17,13 +17,13 @@ class _MainScaffoldState extends State<MainScaffold>
     with TickerProviderStateMixin {
   late PageController _pageViewController;
   late TabController _tabController;
-  int _currentPageIndex = 0;
+  int _currentPageIndex = 1;
   int length = 4;
 
   @override
   void initState() {
     super.initState();
-    _pageViewController = PageController();
+    _pageViewController = PageController(initialPage: 1);
     _tabController = TabController(length: length, vsync: this);
   }
 

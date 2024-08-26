@@ -71,7 +71,7 @@ class OvalBlurBackground extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height / 852;
     final double width = MediaQuery.of(context).size.width / 393;
 
-    return ClipRRect(
+    return ClipOval(
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -81,7 +81,7 @@ class OvalBlurBackground extends StatelessWidget {
               width: 125 * width,
               height: 160 * height,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.45),
+                color: color.withOpacity(0.65),
                 borderRadius: BorderRadius.circular(100),
               ),
             ),

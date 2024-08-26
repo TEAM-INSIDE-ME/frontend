@@ -27,6 +27,7 @@ class InsideMe extends StatelessWidget {
       create: (context) => InfoProvider(),
       child: MaterialApp(
         title: 'Inside Me',
+        //debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: bg1,
           fontFamily: 'Pretendard',

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/custom_icons.dart';
@@ -16,42 +17,37 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height / 852;
     final double width = MediaQuery.of(context).size.width / 393;
 
     return Scaffold(
-      //appBar: AppBar(),
       //backgroundColor: const Color.fromRGBO(60, 65, 92, 1),
       body: Stack(
         children: [
           const HomeBackground(),
-          Positioned.fill(
-            top: 0 * height,
-            left: -280 * width,
-            child: OvalBlurBackground(color: emGreen),
-          ),
-          Positioned.fill(
-            top: 0 * height,
-            right: -280 * width,
-            child: OvalBlurBackground(color: emYellow),
-          ),
-          Positioned.fill(
-            top: -250 * height,
-            child: OvalBlurBackground(color: emRed),
-          ),
-          Positioned.fill(
-            top: 100 * height,
-            child: RadialBlurBackground(color: emBlue),
+          Positioned(
+            top: 90 * height,
+            right: 20 * width,
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.share,
+                    color: sub3,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.settings_outlined,
+                    color: sub3,
+                  ),
+                ),
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -88,9 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           MarbleBackground(
                             radius: 45,
-                            marble: Icon(
-                              Icons.add,
-                              color: sub3,
+                            marble: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.add,
+                                color: sub3,
+                              ),
                             ),
                           ),
                           MarbleBackground(
@@ -135,6 +134,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          Positioned(
+            top: 365 * height,
+            right: 0 * width,
+            left: 0 * width,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/character_0.png',
+                  height: 190 * height,
+                  width: 190 * width,
+                ),
+                Container(
+                  width: 134 * width,
+                  height: 23 * height,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 178, 190, 225)
+                            .withOpacity(0.6),
+                        offset: const Offset(0, 0),
+                        blurRadius: 25,
+                        spreadRadius: 5,
+                        blurStyle: BlurStyle.normal,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -148,21 +179,45 @@ class HomeBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            bg1.withOpacity(0.7),
-            primary.withOpacity(0.7),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: const [11 / 757, 629.5 / 757],
+    final double height = MediaQuery.of(context).size.height / 852;
+    final double width = MediaQuery.of(context).size.width / 393;
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                bg1.withOpacity(0.7),
+                primary.withOpacity(0.7),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [11 / 757, 629.5 / 757],
+            ),
+            //color: Color.fromRGBO(60, 65, 92, 1),
+          ),
         ),
-        //color: Color.fromRGBO(60, 65, 92, 1),
-      ),
+        Positioned.fill(
+          top: 0 * height,
+          left: -280 * width,
+          child: OvalBlurBackground(color: emGreen),
+        ),
+        Positioned.fill(
+          top: 0 * height,
+          right: -280 * width,
+          child: OvalBlurBackground(color: emYellow),
+        ),
+        Positioned.fill(
+          top: -250 * height,
+          child: OvalBlurBackground(color: emRed),
+        ),
+        Positioned.fill(
+          top: 100 * height,
+          child: RadialBlurBackground(color: emBlue),
+        ),
+      ],
     );
   }
 }
