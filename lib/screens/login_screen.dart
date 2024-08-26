@@ -24,22 +24,22 @@ class LoginScreen extends StatelessWidget {
           Positioned(
             top: 20 * height,
             left: 0,
-            child: Image.asset('assets/images/green_bg.png'),
+            child: Image.asset('assets/images/background/green_bg.png'),
           ),
           Positioned(
             top: 30 * height,
             right: 0,
-            child: Image.asset('assets/images/red_bg.png'),
+            child: Image.asset('assets/images/background/red_bg.png'),
           ),
           Positioned(
             top: 180 * height,
             left: 0,
-            child: Image.asset('assets/images/blue_bg.png'),
+            child: Image.asset('assets/images/background/blue_bg.png'),
           ),
           Positioned(
             top: 280 * height,
             right: 0,
-            child: Image.asset('assets/images/yellow_bg.png'),
+            child: Image.asset('assets/images/background/yellow_bg.png'),
           ),
           Center(
             child: Column(

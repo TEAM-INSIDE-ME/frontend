@@ -85,8 +85,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 7 * width,
                 ),
                 Container(
-                  height: 48,
-                  width: 306,
+                  height: 48 * height,
+                  width: 306 * width,
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(244, 246, 253, 0.5),
                     borderRadius: BorderRadius.circular(100),
@@ -95,58 +95,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     children: [
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 0
-                            ? Image.asset(
-                                'assets/images/marbles/red_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'red_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 1
-                            ? Image.asset(
-                                'assets/images/marbles/orange_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'orange_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 2
-                            ? Image.asset(
-                                'assets/images/marbles/yellow_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'yellow_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 3
-                            ? Image.asset(
-                                'assets/images/marbles/green_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'green_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 4
-                            ? Image.asset(
-                                'assets/images/marbles/blue_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'blue_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 5
-                            ? Image.asset(
-                                'assets/images/marbles/navy_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'navy_marble_1',
                               )
                             : Container(),
                       ),
                       MarbleBackground(
+                        radius: 38,
                         marble: _selectedIndex >= 6
-                            ? Image.asset(
-                                'assets/images/marbles/purple_marble_1.png',
-                                fit: BoxFit.fill,
+                            ? Marble(
+                                marbleName: 'purple_marble_1',
                               )
                             : Container(),
                       ),

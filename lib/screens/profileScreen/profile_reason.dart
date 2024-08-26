@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/widgets/profile_body.dart';
+import 'package:frontend/scaffolds/profile_body.dart';
 
 class ProfileReason extends StatefulWidget {
   VoidCallback onTap;

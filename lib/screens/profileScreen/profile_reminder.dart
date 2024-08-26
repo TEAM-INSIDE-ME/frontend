@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/widgets/profile_body.dart';
+import 'package:frontend/scaffolds/profile_body.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProfileReminder extends StatefulWidget {

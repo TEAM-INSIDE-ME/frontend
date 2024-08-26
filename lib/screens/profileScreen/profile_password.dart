@@ -6,7 +6,7 @@ import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/utils/info_provider.dart';
-import 'package:frontend/widgets/profile_body.dart';
+import 'package:frontend/scaffolds/profile_body.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePassword extends StatelessWidget {

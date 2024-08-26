@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/widgets/profile_body.dart';
+import 'package:frontend/scaffolds/profile_body.dart';
 
 class ProfileJob extends StatefulWidget {
   VoidCallback onTap;
@@ -77,6 +77,7 @@ class _ProfileJobState extends State<ProfileJob> {
               padding: EdgeInsets.only(top: 30 * height),
               child: Wrap(
                 spacing: 10 * width,
+                //runSpacing: 12 * height,
                 children: List<Widget>.generate(jobs.length, (index) {
                   return ChoiceChip(
                     label: Text(

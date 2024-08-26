@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/scaffolds/main_scaffold.dart';
+import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/screens/login_screen.dart';
@@ -31,8 +33,8 @@ class InsideMe extends StatelessWidget {
         ),
 
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
-        //home: const ProfileScreen(),
-        home: const ProfileScreen(),
+
+        home: const MainScaffold(),
       ),
     );
   }
