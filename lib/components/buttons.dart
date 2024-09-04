@@ -8,13 +8,14 @@ import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/login_screen.dart';
 
 class LoginBtn extends StatelessWidget {
-  final String path, snsName;
+  VoidCallback onPressed;
+  final String snsName;
   final Color btnColor, txtColor;
   IconData iconData;
 
   LoginBtn({
     super.key,
-    required this.path,
+    required this.onPressed,
     required this.snsName,
     required this.btnColor,
     required this.txtColor,
@@ -29,15 +30,7 @@ class LoginBtn extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 12 * height),
       child: TextButton.icon(
-        onPressed: () {
-          path == 'kakao'
-              ? signInWithKakao(context)
-              : path == 'naver'
-                  ? signInWithNaver(context)
-                  : path == 'google'
-                      ? signInWithGoogle(context)
-                      : null;
-        },
+        onPressed: onPressed,
         icon: Icon(
           iconData,
           size: 17 * width,

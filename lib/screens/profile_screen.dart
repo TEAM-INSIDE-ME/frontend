@@ -58,7 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width / 393;
     final double height = MediaQuery.of(context).size.height / 839;
-    final textProvider = Provider.of<InfoProvider>(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -177,7 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ProfileBirth(
               onTap: _goToNextPage,
-              name: textProvider.name,
             ),
             ProfileJob(
               onTap: _goToNextPage,

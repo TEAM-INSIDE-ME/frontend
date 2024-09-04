@@ -1,26 +1,47 @@
 import 'package:flutter/material.dart';
 
 class InfoProvider extends ChangeNotifier {
-  String _name = '';
-  late DateTime _birth;
-  String _password = '';
+  String name = '';
+  String email = '';
+  String remindTime = '';
+  String password = '';
+  late int frequency;
+  late int weeksOfConsecutiveSuccess;
+  late int totalMinute;
+  String gender = '';
+  late DateTime birth;
+  String job = '';
+  String purpose = '';
 
-  String get name => _name;
-  DateTime get birth => _birth;
-  String get password => _password;
+  // String get _name => name;
+  // String get _emial => email;
+  // String get _remindTime => remindTime;
+  // String get _password => password;
+  // int get _frequency => frequency;
+  // int get _weeksOfConsecutiveSuccess => weeksOfConsecutiveSuccess;
+  // int get _totalMinute => totalMinute;
+  // String get _gender => gender;
+  // DateTime get _birth => birth;
+  // String get _job => job;
+  // String get _purpose => purpose;
 
-  void getName(String newText) {
-    _name = newText;
+  void getName(String newName) {
+    name = newName;
+    notifyListeners();
+  }
+
+  void getGender(String newGender) {
+    gender = newGender;
     notifyListeners();
   }
 
   void getBirth(DateTime newDay) {
-    _birth = newDay;
+    birth = newDay;
     notifyListeners();
   }
 
   void getPassword(String newPassword) {
-    _password = newPassword;
+    password = newPassword;
     notifyListeners();
   }
 }

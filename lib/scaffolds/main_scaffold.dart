@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/home_screen.dart';
+import 'package:frontend/screens/mainScreen/home_screen.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});

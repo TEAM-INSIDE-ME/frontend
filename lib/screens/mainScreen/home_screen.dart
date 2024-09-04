@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(
                     Icons.share,
                     color: sub3,
+                    size: 24,
                   ),
                 ),
                 IconButton(
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(
                     Icons.settings_outlined,
                     color: sub3,
+                    size: 24,
                   ),
                 ),
               ],
