@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/scaffolds/profile_body.dart';
+import 'package:frontend/screens/profileScreen/profile_body.dart';
+import 'package:frontend/utils/info_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileJob extends StatefulWidget {
   VoidCallback onTap;
@@ -18,7 +20,6 @@ class ProfileJob extends StatefulWidget {
 
 class _ProfileJobState extends State<ProfileJob> {
   int? _value;
-
   List<String> jobs = [
     '사무직',
     '학생',
@@ -46,6 +47,7 @@ class _ProfileJobState extends State<ProfileJob> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height / 852;
     final double width = MediaQuery.of(context).size.width / 393;
+    var textProvider = Provider.of<InfoProvider>(context);
 
     return Body(
       message: '\n어떤 일을 하시나요?',
@@ -103,6 +105,7 @@ class _ProfileJobState extends State<ProfileJob> {
                     onSelected: (bool selected) {
                       setState(() {
                         _value = selected ? index : null;
+                        textProvider.getJob(jobs[index]);
                       });
                     },
                   );

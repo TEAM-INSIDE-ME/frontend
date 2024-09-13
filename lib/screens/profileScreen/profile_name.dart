@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/utils/info_provider.dart';
-import 'package:frontend/scaffolds/profile_body.dart';
+import 'package:frontend/screens/profileScreen/profile_body.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +63,7 @@ class _ProfileNameState extends State<ProfileName> {
                     alignment: const Alignment(0.9, 0),
                     height: 16,
                     child: Text(
-                      _isFocused ? "$_counterText/30" : ' ',
+                      _isFocused ? "$_counterText/20" : ' ',
                       style: TextStyle(
                         color: sub2,
                         fontSize: 10,
@@ -148,7 +148,7 @@ class _ProfileNameState extends State<ProfileName> {
         ),
         counterText: "",
       ),
-      maxLength: 30,
+      maxLength: 20,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       cursorColor: sub3,
       cursorHeight: 19,

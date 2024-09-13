@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/scaffolds/main_scaffold.dart';
+import 'package:frontend/screens/mainScreen/home_scaffold.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
@@ -28,12 +28,11 @@ Future<void> main() async {
 Future<Widget> _tokenStatus() async {
   // Refresh Token
   String? refreshToken = await getRefreshToken();
-
   if (refreshToken != null) {
     bool isRefreshed = await refreshAccessToken();
     if (isRefreshed) {
       // 재발급 성공하면 메인 화면
-      return const MainScaffold();
+      return const HomeScaffold();
     } else {
       // 실패하면 로그인 화면
       return const LoginScreen();
@@ -64,8 +63,8 @@ class InsideMe extends StatelessWidget {
         ),
 
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
-
-        home: const LoginScreen(),
+        //구라치기
+        home: const HomeScaffold(),
       ),
     );
   }

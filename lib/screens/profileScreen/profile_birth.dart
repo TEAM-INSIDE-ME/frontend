@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:frontend/utils/info_provider.dart';
-import 'package:frontend/scaffolds/profile_body.dart';
+import 'package:frontend/screens/profileScreen/profile_body.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +26,49 @@ class _BirthState extends State<ProfileBirth> {
   var year = 'YYYY', month = 'MM', day = 'DD';
 
   var isTap = List<bool>.filled(3, false); // 눌린 영역
-  var testTapup = List<bool>.filled(3, false); // 움직이는 지
+  var isChanging = List<bool>.filled(3, false); // 움직이는 지
   var tap = false; //한 번 열었는지
-  var isPopup = false;
+  var isPopup = false; // 열려 있는지
+
   DateTime date = DateTime.now();
+  int _lastYear = DateTime.now().year;
+  int _lastMonth = DateTime.now().month;
+  int _lastDay = DateTime.now().day;
+
   var cnt = 0;
+
+  void _onDateChanged(DateTime newDate) {
+    if (newDate.year != _lastYear) {
+      print('년도가 바꼈다!!!');
+      setState(() {
+        isChanging = List.filled(3, false);
+        isChanging[0] = true;
+      });
+    }
+    if (newDate.month != _lastMonth) {
+      print('월이 바뀌었다람쥐~');
+      setState(() {
+        isChanging = List.filled(3, false);
+        isChanging[1] = true;
+      });
+    }
+    if (newDate.day != _lastDay) {
+      print('이번에는 일이당~~');
+      setState(() {
+        isChanging = List.filled(3, false);
+        isChanging[2] = true;
+      });
+    }
+
+    _lastYear = newDate.year;
+    _lastMonth = newDate.month;
+    _lastDay = newDate.day;
+
+    setState(() {
+      date = newDate;
+      isTap = List.filled(3, false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +187,6 @@ class _BirthState extends State<ProfileBirth> {
                   child: GestureDetector(
                     onTapUp: (details) {
                       final dx = details.localPosition.dx;
-
                       if (dx <= 110) {
                         setState(() {
                           isTap = List.filled(3, false);
@@ -176,64 +213,35 @@ class _BirthState extends State<ProfileBirth> {
                       await showCupertinoModalPopup<bool>(
                         context: context,
                         builder: (BuildContext context) {
-                          return GestureDetector(
-                            onTapUp: (details) {
-                              double dx = details.localPosition.dx;
-                              if (dx <= 110) {
-                                setState(() {
-                                  testTapup = List.filled(3, false);
-                                  testTapup[0] = true;
-                                });
-                              }
-                              if (dx > 110 && dx <= 220) {
-                                setState(() {
-                                  testTapup = List.filled(3, false);
-                                  testTapup[1] = true;
-                                });
-                              }
-                              if (dx > 220 && dx <= 330) {
-                                setState(() {
-                                  testTapup = List.filled(3, false);
-                                  testTapup[2] = true;
-                                });
-                              }
-                            },
-                            child: Container(
-                              constraints:
-                                  BoxConstraints(maxHeight: height * 270),
-                              padding: const EdgeInsets.all(6),
-                              color: Colors.grey[400],
-                              child: SafeArea(
-                                top: false,
-                                child: CupertinoDatePicker(
-                                  maximumYear: 2024,
-                                  mode: CupertinoDatePickerMode.date,
-                                  dateOrder: DatePickerDateOrder.ymd,
-                                  initialDateTime: date,
-                                  maximumDate: DateTime.now(),
-                                  onDateTimeChanged: (DateTime selectedTime) {
-                                    setState(() {
-                                      // testTapup[0] =
-                                      //     DateTime.now() != selectedTime;
-                                      // testTapup[1] = DateTime.now().month !=
-                                      //     selectedTime.month;
-                                      // testTapup[2] = DateTime.now().day !=
-                                      //     selectedTime.day;
-
-                                      print(date);
-                                      date = selectedTime;
-                                      dayProvider.getBirth(date);
-                                    });
-                                  },
-                                ),
+                          return Container(
+                            constraints:
+                                BoxConstraints(maxHeight: height * 270),
+                            padding: const EdgeInsets.all(6),
+                            color: Colors.grey[400],
+                            child: SafeArea(
+                              top: false,
+                              child: CupertinoDatePicker(
+                                maximumYear: 2024,
+                                mode: CupertinoDatePickerMode.date,
+                                dateOrder: DatePickerDateOrder.ymd,
+                                //initialDateTime: DateTime(2002, 01, 01),
+                                initialDateTime: date,
+                                maximumDate: DateTime.now(),
+                                onDateTimeChanged: (DateTime selectedTime) {
+                                  setState(() {
+                                    _onDateChanged(selectedTime);
+                                    dayProvider.getBirth(date);
+                                  });
+                                },
                               ),
                             ),
                           );
                         },
-                      );
-                      setState(() {
-                        isPopup = false;
-                        cnt += 1;
+                      ).then((_) {
+                        setState(() {
+                          isPopup = false;
+                          isChanging = List.filled(3, false);
+                        });
                       });
                     },
                     child: SizedBox(
@@ -245,8 +253,12 @@ class _BirthState extends State<ProfileBirth> {
                             width: 110 * width,
                             height: 53 * height,
                             decoration: ShapeDecoration(
-                              color: isPopup && testTapup[0]
-                                  ? selectedBg
+                              color: isPopup
+                                  ? isTap[0]
+                                      ? selectedBg
+                                      : isChanging[0]
+                                          ? selectedBg
+                                          : nonSelectedBg
                                   : nonSelectedBg,
                               shape: RoundedRectangleBorder(
                                 borderRadius: const BorderRadius.only(
@@ -254,30 +266,30 @@ class _BirthState extends State<ProfileBirth> {
                                   topLeft: Radius.circular(100),
                                 ),
                                 side: BorderSide(
-                                  color: isPopup && isTap[0]
-                                      ? selectedBorder
+                                  color: isPopup
+                                      ? isTap[0]
+                                          ? selectedBorder
+                                          : isChanging[0]
+                                              ? selectedBorder
+                                              : nonSelectedBorder
                                       : nonSelectedBorder,
                                 ),
                               ),
                             ),
                             child: Center(
                               child: Text(
-                                tap
-                                    ? isTap[0]
+                                isChanging[0]
+                                    ? '${date.year}'
+                                    : tap
                                         ? '${date.year}'
-                                        : testTapup[0]
-                                            ? '${date.year}'
-                                            : 'YYYY'
-                                    : 'YYYY',
+                                        : 'YYYY',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: tap
-                                      ? isTap[0]
+                                  color: isChanging[0]
+                                      ? sub1
+                                      : tap
                                           ? sub1
-                                          : testTapup[0]
-                                              ? sub1
-                                              : sub4
-                                      : sub4,
+                                          : sub4,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -287,37 +299,39 @@ class _BirthState extends State<ProfileBirth> {
                             width: 109 * width,
                             height: 53 * height,
                             decoration: ShapeDecoration(
-                              color: isPopup && isTap[1]
-                                  ? selectedBg
+                              color: isPopup
+                                  ? isTap[1]
+                                      ? selectedBg
+                                      : isChanging[1]
+                                          ? selectedBg
+                                          : nonSelectedBg
                                   : nonSelectedBg,
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
-                                  color: isPopup && isTap[1]
-                                      ? selectedBorder
+                                  color: isPopup
+                                      ? isTap[1]
+                                          ? selectedBorder
+                                          : isChanging[1]
+                                              ? selectedBorder
+                                              : nonSelectedBorder
                                       : nonSelectedBorder,
                                 ),
                               ),
                             ),
                             child: Center(
                               child: Text(
-                                tap
-                                    ? isTap[1]
+                                isChanging[1]
+                                    ? date.month.toString().padLeft(2, '0')
+                                    : tap
                                         ? date.month.toString().padLeft(2, '0')
-                                        : testTapup[1]
-                                            ? date.month
-                                                .toString()
-                                                .padLeft(2, '0')
-                                            : 'MM'
-                                    : 'MM',
+                                        : 'MM',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: tap
-                                      ? isTap[1] // 눌러서 열면 색 바뀜
+                                  color: isChanging[1]
+                                      ? sub1
+                                      : tap
                                           ? sub1
-                                          : testTapup[1] // 움직이면 색 바뀜
-                                              ? sub1
-                                              : sub4
-                                      : sub4,
+                                          : sub4,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -327,8 +341,12 @@ class _BirthState extends State<ProfileBirth> {
                             width: 110 * width,
                             height: 53 * height,
                             decoration: ShapeDecoration(
-                              color: isPopup && isTap[2]
-                                  ? selectedBg
+                              color: isPopup
+                                  ? isTap[2]
+                                      ? selectedBg
+                                      : isChanging[2]
+                                          ? selectedBg
+                                          : nonSelectedBg
                                   : nonSelectedBg,
                               shape: RoundedRectangleBorder(
                                 borderRadius: const BorderRadius.only(
@@ -336,32 +354,30 @@ class _BirthState extends State<ProfileBirth> {
                                   topRight: Radius.circular(100),
                                 ),
                                 side: BorderSide(
-                                  color: isPopup && isTap[2]
-                                      ? selectedBorder
+                                  color: isPopup
+                                      ? isTap[2]
+                                          ? selectedBorder
+                                          : isChanging[2]
+                                              ? selectedBorder
+                                              : nonSelectedBorder
                                       : nonSelectedBorder,
                                 ),
                               ),
                             ),
                             child: Center(
                               child: Text(
-                                tap
-                                    ? isTap[2]
+                                isChanging[2]
+                                    ? date.day.toString().padLeft(2, '0')
+                                    : tap
                                         ? date.day.toString().padLeft(2, '0')
-                                        : testTapup[2]
-                                            ? date.day
-                                                .toString()
-                                                .padLeft(2, '0')
-                                            : 'DD'
-                                    : 'DD',
+                                        : 'DD',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: tap
-                                      ? isTap[2]
+                                  color: isChanging[2]
+                                      ? sub1
+                                      : tap
                                           ? sub1
-                                          : testTapup[2]
-                                              ? sub1
-                                              : sub4
-                                      : sub4,
+                                          : sub4,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -383,7 +399,7 @@ class _BirthState extends State<ProfileBirth> {
       ),
       secondContent: NextButton(
         onTap: widget.onTap,
-        isfilled: _value != null,
+        isfilled: _value != null && date.year != DateTime.now().year,
         index: 0,
       ),
     );

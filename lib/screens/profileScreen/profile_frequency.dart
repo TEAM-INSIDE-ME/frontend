@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/scaffolds/profile_body.dart';
+import 'package:frontend/screens/profileScreen/profile_body.dart';
 
 class ProfileFreq extends StatefulWidget {
   VoidCallback onTap;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/mainScreen/home_scaffold.dart';
+import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_frequency.dart';
 import 'package:frontend/screens/profileScreen/profile_job.dart';
 import 'package:frontend/screens/profileScreen/profile_name.dart';
@@ -13,15 +15,20 @@ import 'package:frontend/utils/info_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final int initialIndex;
+  const ProfileScreen({
+    super.key,
+    this.initialIndex = 0,
+  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final PageController _pageController = PageController(initialPage: 0);
-  int _selectedIndex = 0;
+  late final PageController _pageController =
+      PageController(initialPage: widget.initialIndex);
+  late int _selectedIndex;
   final int _numPages = 7;
 
   void _goToNextPage() {
@@ -46,6 +53,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _selectedIndex = widget.initialIndex;
   }
 
   @override
@@ -190,7 +204,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: _goToNextPage,
             ),
             ProfilePassword(
-              onTap: _goToNextPage,
+              onTap: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const HomeScaffold()),
+                );
+              },
             ),
           ],
         ),

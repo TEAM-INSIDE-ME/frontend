@@ -12,6 +12,7 @@ class InfoProvider extends ChangeNotifier {
   late DateTime birth;
   String job = '';
   String purpose = '';
+  late String resolution = '';
 
   // String get _name => name;
   // String get _emial => email;
@@ -24,6 +25,7 @@ class InfoProvider extends ChangeNotifier {
   // DateTime get _birth => birth;
   // String get _job => job;
   // String get _purpose => purpose;
+  String get _resulution => resolution;
 
   void getName(String newName) {
     name = newName;
@@ -40,8 +42,18 @@ class InfoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void getJob(String newJob) {
+    job = newJob;
+    notifyListeners();
+  }
+
   void getPassword(String newPassword) {
     password = newPassword;
+    notifyListeners();
+  }
+
+  void getResolution(String newResolution) {
+    resolution = newResolution;
     notifyListeners();
   }
 }

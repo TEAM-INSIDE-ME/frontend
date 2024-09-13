@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/writingScreen/writing_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -87,7 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           MarbleBackground(
                             radius: 45,
                             marble: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        const WritingScreen(),
+                                  ),
+                                );
+                              },
                               icon: Icon(
                                 Icons.add,
                                 color: sub3,

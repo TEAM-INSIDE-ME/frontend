@@ -4,16 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/mainScreen/calendar_screen.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 
-class MainScaffold extends StatefulWidget {
-  const MainScaffold({super.key});
+class HomeScaffold extends StatefulWidget {
+  const HomeScaffold({super.key});
 
   @override
-  State<MainScaffold> createState() => _MainScaffoldState();
+  State<HomeScaffold> createState() => _HomeScaffoldState();
 }
 
-class _MainScaffoldState extends State<MainScaffold>
+class _HomeScaffoldState extends State<HomeScaffold>
     with TickerProviderStateMixin {
   late PageController _pageViewController;
   late TabController _tabController;
@@ -44,11 +45,7 @@ class _MainScaffoldState extends State<MainScaffold>
             controller: _pageViewController,
             onPageChanged: _handlePageViewChanged,
             children: const <Widget>[
-              Center(
-                child: Text(
-                  'Calendar Page',
-                ),
-              ),
+              CalendarScreen(),
               HomeScreen(),
               Center(
                 child: Text(

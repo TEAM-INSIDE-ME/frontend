@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/mainScreen/home_scaffold.dart';
+import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/utils/info_provider.dart';
-import 'package:frontend/scaffolds/profile_body.dart';
+import 'package:frontend/screens/profileScreen/profile_body.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePassword extends StatelessWidget {
@@ -132,7 +134,116 @@ class ProfilePassword extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
-                  showAboutDialog(context: context);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 284 * width,
+                          height: 190 * height,
+                          decoration: BoxDecoration(
+                            color: bg1,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 18.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      right: 16.0, left: 16.0, top: 6.0),
+                                  child: Text(
+                                    '비밀번호를 설정하지\n않으실 건가요?',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Text(
+                                  '시작하기를 누르면 비밀번호 설정 없이\n인사이드미를 시작합니다',
+                                  style: TextStyle(
+                                    color: sub3,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 18.0, left: 18.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Container(
+                                          width: 119 * width,
+                                          height: 40 * height,
+                                          decoration: BoxDecoration(
+                                            color: sub4,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              '취소',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push<void>(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>
+                                                  const HomeScaffold(),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 119 * width,
+                                          height: 40 * height,
+                                          decoration: BoxDecoration(
+                                            color: primary,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              '확인',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Text(
                   '비밀번호 설정 안하고 시작할래요!',
