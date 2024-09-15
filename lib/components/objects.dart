@@ -21,6 +21,7 @@ class MarbleBackground extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.5),
       child: Container(
+        padding: const EdgeInsets.all(0),
         height: radius * height,
         width: radius * width,
         decoration: BoxDecoration(
@@ -30,7 +31,7 @@ class MarbleBackground extends StatelessWidget {
             BoxShadow(
                 color: Color.fromRGBO(157, 169, 204, 0.1),
                 blurRadius: 30.0,
-                spreadRadius: 2.2,
+                spreadRadius: 2.5,
                 offset: Offset(0, 2.2),
                 blurStyle: BlurStyle.inner),
           ],
@@ -53,11 +54,12 @@ class Marble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/images/marbles/$marbleName.png',
-      scale: 1.0,
+      //scale: 2,
     );
   }
 }
 
+// 타원형 블러링 배경
 class OvalBlurBackground extends StatelessWidget {
   Color color;
 
@@ -125,6 +127,7 @@ class OvalBlurBackground extends StatelessWidget {
   }
 }
 
+// 원형 블러링 배경
 class RadialBlurBackground extends StatelessWidget {
   Color color;
 

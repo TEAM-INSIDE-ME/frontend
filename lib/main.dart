@@ -8,6 +8,7 @@ import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:frontend/utils/user_auth_manager.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:provider/provider.dart';
 
@@ -20,9 +21,9 @@ Future<void> main() async {
     javaScriptAppKey: '256ccb709d41bc1d8d1453141e7600ca',
   );
   Widget initializedScreen = await _tokenStatus();
-  runApp(InsideMe(
-    initializedScreen: initializedScreen,
-  ));
+  initializeDateFormatting().then((_) => runApp(InsideMe(
+        initializedScreen: initializedScreen,
+      )));
 }
 
 Future<Widget> _tokenStatus() async {
