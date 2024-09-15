@@ -42,6 +42,7 @@ dependencies:
   shared_preferences: ^2.2.3
   table_calendar: ^3.1.2
   intl: ^0.19.0
+  dropdown_button2: ^2.3.9
   #login
   flutter_naver_login: ^1.8.0
   google_sign_in: ^6.2.1

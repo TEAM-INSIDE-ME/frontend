@@ -34,7 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push<void>(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            const WritingScreen(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.share,
                     color: sub3,
@@ -85,21 +93,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          MarbleBackground(
-                            radius: 45,
-                            marble: IconButton(
-                              onPressed: () {
-                                Navigator.push<void>(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        const WritingScreen(),
-                                  ),
-                                );
-                              },
-                              icon: Icon(
-                                Icons.add,
-                                color: sub3,
+                          GestureDetector(
+                            onTap: () {
+                              print('object');
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const WritingScreen(),
+                                ),
+                              );
+                            },
+                            child: MarbleBackground(
+                              radius: 45,
+                              marble: IconButton(
+                                onPressed: () {
+                                  // Navigator.push<void>(
+                                  //   context,
+                                  //   MaterialPageRoute<void>(
+                                  //     builder: (BuildContext context) =>
+                                  //         const WritingScreen(),
+                                  //   ),
+                                  // );
+                                },
+                                icon: Icon(
+                                  Icons.add,
+                                  color: sub3,
+                                ),
                               ),
                             ),
                           ),

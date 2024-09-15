@@ -1,9 +1,12 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/last_month_report_screen.dart';
+import 'package:frontend/screens/whole_view_screen.dart';
 import 'package:frontend/screens/writingScreen/writing_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -26,12 +29,23 @@ class _CalendarScreenState extends State<CalendarScreen> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  late String _selectedYearMonth;
+
+// 년도 월 목록
+  final List<DateTime> _yearMonthOptions = List.generate(
+    12 * 20,
+    (index) => DateTime(
+      2020 + index ~/ 12,
+      (index % 12) + 1,
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
     _focusNode.addListener(_onFocusChange);
     _loadResolution();
+    _selectedYearMonth = '${_focusedDay.year}년 ${_focusedDay.month}월';
   }
 
   @override
@@ -88,6 +102,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
     prefs.setString('resolution', textController.text);
   }
 
+  // 달력에 선택된 월 반영
+  void _updateFocusedDay() {
+    List<String> parts = _selectedYearMonth.split(' ');
+    int selectedYear = int.parse(parts[0].replaceAll('년', ''));
+    int selectedMonth = int.parse(parts[1].replaceAll('월', ''));
+
+    setState(() {
+      _focusedDay = DateTime(selectedYear, selectedMonth, 1); // 선택된 월로 이동
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height / 852;
@@ -104,28 +129,60 @@ class _CalendarScreenState extends State<CalendarScreen> {
               height: 70 * height,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SizedBox(
                 height: 50 * height,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Text(
-                        '2024년 9월',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: sub1,
+                child: Row(
+                  children: [
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        value: _selectedYearMonth,
+                        items: _yearMonthOptions.map((DateTime dateTime) {
+                          String yearMonthText =
+                              '${dateTime.year}년 ${dateTime.month}월';
+                          return DropdownMenuItem<String>(
+                            alignment: Alignment.center,
+                            value: yearMonthText,
+                            child: Text(
+                              yearMonthText,
+                              style: TextStyle(
+                                color: sub1,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedYearMonth = newValue!;
+                            _updateFocusedDay();
+                          });
+                        },
+                        iconStyleData: IconStyleData(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: sub4,
+                            size: 24,
+                          ),
+                        ),
+                        buttonStyleData: ButtonStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        alignment: Alignment.centerLeft,
+                        dropdownStyleData: DropdownStyleData(
+                          maxHeight: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                          ),
+                          elevation: 1,
                         ),
                       ),
-                      Icon(
-                        Icons.keyboard_arrow_down_sharp,
-                        size: 24,
-                        color: sub4,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -169,6 +226,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   },
                   onPageChanged: (focusedDay) {
                     _focusedDay = focusedDay;
+                    _selectedYearMonth =
+                        '${focusedDay.year}년 ${focusedDay.month}월';
                   },
                   calendarBuilders: CalendarBuilders(
                     // 디폴트 값 셀 빌더
@@ -398,43 +457,69 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 64 * height,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceEvenly, // 각각 가운데 정렬
-                    children: [
-                      Text(
-                        "전체 기록 보기",
-                        style: TextStyle(
-                          color: sub3,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+              child: Container(
+                height: 64 * height,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 각각 가운데 정렬
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                const WholeViewScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 20 * height),
+                        child: Text(
+                          "전체 기록 보기",
+                          style: TextStyle(
+                            color: sub3,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                      VerticalDivider(
-                        // 세로 선 긋기
-                        width: 1,
-                        indent: 12 * height, // 위 아래 간격 두기
-                        endIndent: 12 * height,
-                        color: sub4,
-                      ),
-                      Text(
-                        "지날 달 보고서",
-                        style: TextStyle(
-                          color: sub3,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                    ),
+                    VerticalDivider(
+                      // 세로 선 긋기
+                      width: 1,
+                      indent: 12 * height, // 위 아래 간격 두기
+                      endIndent: 12 * height,
+                      color: sub4,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                const LastMonthReportScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 20),
+                        child: Text(
+                          "지날 달 보고서",
+                          style: TextStyle(
+                            color: sub3,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
