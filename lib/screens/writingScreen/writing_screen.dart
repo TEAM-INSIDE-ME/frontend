@@ -8,8 +8,10 @@ class WritingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color backgroundColor = const Color.fromARGB(255, 251, 251, 254);
+    DateTime today = DateTime.now();
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
         iconTheme: IconThemeData(
@@ -55,8 +57,50 @@ class WritingScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        color: backgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 20.0),
+        child: ClipRRect(
+          child: Container(
+            height: double.maxFinite,
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: sub5,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(18),
+                topRight: Radius.circular(18),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${today.year}년 ${today.month}월 ${today.day}일',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextField(
+                    onTapOutside: (event) =>
+                        FocusManager.instance.primaryFocus?.unfocus(),
+                    decoration: InputDecoration(
+                      hintText: '제목',
+                      hintStyle: TextStyle(
+                        color: sub4,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const TextField(),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
