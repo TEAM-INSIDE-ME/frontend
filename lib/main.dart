@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/mainScreen/calendar_screen.dart';
 import 'package:frontend/screens/mainScreen/home_scaffold.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profile_screen.dart';
+import 'package:frontend/screens/whole_view_screen.dart';
+import 'package:frontend/screens/writingScreen/writing_screen.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -65,7 +68,14 @@ class InsideMe extends StatelessWidget {
 
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
         //구라치기
-        home: const HomeScaffold(),
+        home: const WritingScreen(),
+        initialRoute: '/',
+        routes: {
+          '/home': (context) => const HomeScaffold(),
+          '/write': (context) => const WritingScreen(),
+          '/view': (context) => const WholeViewScreen(),
+          '/calendar': (context) => const CalendarScreen(),
+        },
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
+import 'package:frontend/components/custom_dialog.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_body.dart';
 import 'package:flutter/cupertino.dart';
@@ -196,116 +197,143 @@ class _ProfileReminderState extends State<ProfileReminder> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return Dialog(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 284 * width,
-                            height: 184 * height,
-                            decoration: BoxDecoration(
-                              color: bg1,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 18.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        right: 16.0, left: 16.0, top: 27.0),
-                                    child: Text(
-                                      '알림을 설정하지 않으실 건가요?',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Text(
-                                    '알림은 나중에 다시 설정할 수 있어요',
-                                    style: TextStyle(
-                                      color: sub3,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 18.0, left: 18.0, top: 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Container(
-                                            width: 119 * width,
-                                            height: 40 * height,
-                                            decoration: BoxDecoration(
-                                              color: sub4,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                '취소',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push<void>(
-                                              context,
-                                              MaterialPageRoute<void>(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        const ProfileScreen(
-                                                  initialIndex: 5,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            width: 119 * width,
-                                            height: 40 * height,
-                                            decoration: BoxDecoration(
-                                              color: primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                '확인',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        return CustomDialog(
+                          title: const Text(
+                            '알림을 설정하지 않으실 건가요?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
+                          center: '알림은 나중에 다시 설정할 수 있어요',
+                          lfText: '취소',
+                          rtText: '확인',
+                          lfTap: () {
+                            Navigator.pop(context);
+                          },
+                          rtTap: () {
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const ProfileScreen(
+                                  initialIndex: 5,
+                                ),
+                              ),
+                            );
+                          },
                         );
+                        // return Dialog(
+                        //   alignment: Alignment.center,
+                        //   child: Container(
+                        //     width: 284 * width,
+                        //     height: 184 * height,
+                        //     decoration: BoxDecoration(
+                        //       color: bg1,
+                        //       borderRadius: BorderRadius.circular(20),
+                        //     ),
+                        //     child: Padding(
+                        //       padding:
+                        //           const EdgeInsets.symmetric(vertical: 18.0),
+                        //       child: Column(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           const Padding(
+                        //             padding: EdgeInsets.only(
+                        //                 right: 16.0, left: 16.0, top: 27.0),
+                        //             child: Text(
+                        //               '알림을 설정하지 않으실 건가요?',
+                        //               style: TextStyle(
+                        //                 color: Colors.black,
+                        //                 fontSize: 18,
+                        //                 fontWeight: FontWeight.w600,
+                        //               ),
+                        //               textAlign: TextAlign.center,
+                        //             ),
+                        //           ),
+                        //           Text(
+                        //             '알림은 나중에 다시 설정할 수 있어요',
+                        //             style: TextStyle(
+                        //               color: sub3,
+                        //               fontSize: 13,
+                        //               fontWeight: FontWeight.w400,
+                        //             ),
+                        //             textAlign: TextAlign.center,
+                        //           ),
+                        //           Padding(
+                        //             padding: const EdgeInsets.only(
+                        //                 right: 18.0, left: 18.0, top: 20),
+                        //             child: Row(
+                        //               mainAxisAlignment:
+                        //                   MainAxisAlignment.spaceBetween,
+                        //               children: [
+                        //                 GestureDetector(
+                        //                   onTap: () {
+                        //                     Navigator.pop(context);
+                        //                   },
+                        //                   child: Container(
+                        //                     width: 119 * width,
+                        //                     height: 40 * height,
+                        //                     decoration: BoxDecoration(
+                        //                       color: sub4,
+                        //                       borderRadius:
+                        //                           BorderRadius.circular(10),
+                        //                     ),
+                        //                     child: const Center(
+                        //                       child: Text(
+                        //                         '취소',
+                        //                         style: TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontSize: 16,
+                        //                           fontWeight: FontWeight.w600,
+                        //                         ),
+                        //                       ),
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //                 GestureDetector(
+                        //                   onTap: () {
+                        //                     Navigator.push<void>(
+                        //                       context,
+                        //                       MaterialPageRoute<void>(
+                        //                         builder:
+                        //                             (BuildContext context) =>
+                        //                                 const ProfileScreen(
+                        //                           initialIndex: 5,
+                        //                         ),
+                        //                       ),
+                        //                     );
+                        //                   },
+                        //                   child: Container(
+                        //                     width: 119 * width,
+                        //                     height: 40 * height,
+                        //                     decoration: BoxDecoration(
+                        //                       color: primary,
+                        //                       borderRadius:
+                        //                           BorderRadius.circular(10),
+                        //                     ),
+                        //                     child: const Center(
+                        //                       child: Text(
+                        //                         '확인',
+                        //                         style: TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontSize: 16,
+                        //                           fontWeight: FontWeight.w600,
+                        //                         ),
+                        //                       ),
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // );
                       },
                     );
                   },

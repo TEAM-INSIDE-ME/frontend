@@ -119,7 +119,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final double width = MediaQuery.of(context).size.width / 393;
 
     return Scaffold(
-      // appBar: AppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -502,7 +501,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           context,
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                const LastMonthReportScreen(),
+                                LastMonthReportScreen(),
                           ),
                         );
                       },
