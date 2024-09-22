@@ -49,7 +49,7 @@ class _MainPageViewState extends State<MainPageView>
               HomeScreen(),
               Center(
                 child: Text(
-                  'Second Page',
+                  'Chatting Page',
                 ),
               ),
               Center(

@@ -71,7 +71,8 @@ class InsideMe extends StatelessWidget {
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
         //구라치기
         //home: const ProfileScreen(),
-        home: const LoginScreen(),
+        //home: const LoginScreen(),
+        home: const MainPageView(),
         //home: initializedScreen,
         initialRoute: '/',
         routes: {

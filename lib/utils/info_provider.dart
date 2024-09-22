@@ -5,7 +5,7 @@ class InfoProvider extends ChangeNotifier {
   String email = '';
   String remindTime = '';
   String password = '';
-  late int frequency;
+  int frequency = 0;
   late int totalMinute;
   String gender = '';
   String birth = '';

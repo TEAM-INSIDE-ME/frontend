@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/screens/settingScreen/setting_screen.dart';
 import 'package:frontend/screens/writingScreen/writing_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -72,7 +73,15 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push<void>(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            const SettingScreen(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.settings_outlined,
                     color: sub3,

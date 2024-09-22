@@ -76,16 +76,28 @@ Future<String?> getUserId() async {
 
 Future<void> postUserInfo(BuildContext context) async {
   String? userId = await getUserId();
-  //String? accessToken = await getAccesToken();
-  //String? refreshToken = await getRefreshToken();
+  String? accessToken = await getAccesToken();
+  print(accessToken);
+  String? refreshToken = await getRefreshToken();
   Uri url = Uri.parse('http://localhost:8080/api/user/initUser')
       .replace(queryParameters: {'user_id': '$userId'});
   var userInfo = Provider.of<InfoProvider>(context, listen: false);
-
+  print(accessToken);
+  print(userId);
   try {
+    // print(userInfo.name);
+    // print(userInfo.remindTime);
+    // print(userInfo.password);
+    // print(userInfo.frequency);
+    // print(userInfo.gender);
+    // print(userInfo.birth);
+    // print(userInfo.job);
+    // print(userInfo.purpose);
+
     var response = await http.post(
       url,
       headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $accessToken',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
       body: jsonEncode({
