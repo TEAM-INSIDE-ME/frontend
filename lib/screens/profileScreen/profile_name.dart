@@ -159,7 +159,7 @@ class _ProfileNameState extends State<ProfileName> {
         setState(() {
           _counterText = (value.length).toString();
           textContent = textController.text;
-          textProvider.getName(value);
+          textProvider.saveName(value);
           if (value.isEmpty) {
             errorTextVal = 'min';
           } else {

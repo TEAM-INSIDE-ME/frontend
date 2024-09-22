@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/mainScreen/calendar_screen.dart';
-import 'package:frontend/screens/mainScreen/home_scaffold.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
-import 'package:frontend/screens/profileScreen/profile_password_input.dart';
-import 'package:frontend/screens/success.dart';
+import 'package:frontend/screens/mainScreen/main_page_view.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/screens/whole_view_screen.dart';
@@ -24,19 +22,23 @@ Future<void> main() async {
     javaScriptAppKey: '256ccb709d41bc1d8d1453141e7600ca',
   );
   Widget initializedScreen = await _tokenStatus();
-  initializeDateFormatting().then((_) => runApp(InsideMe(
-        initializedScreen: initializedScreen,
+  initializeDateFormatting().then((_) => runApp(ChangeNotifierProvider(
+        create: (context) => InfoProvider(),
+        child: InsideMe(
+          initializedScreen: initializedScreen,
+        ),
       )));
 }
 
 Future<Widget> _tokenStatus() async {
   // Refresh Token
   String? refreshToken = await getRefreshToken();
+
   if (refreshToken != null) {
     bool isRefreshed = await refreshAccessToken();
     if (isRefreshed) {
       // 재발급 성공하면 메인 화면
-      return const HomeScaffold();
+      return const MainPageView();
     } else {
       // 실패하면 로그인 화면
       return const LoginScreen();
@@ -68,10 +70,12 @@ class InsideMe extends StatelessWidget {
 
         themeMode: ThemeMode.system, // 다크모드 화이트 모드 선택 가능
         //구라치기
-        home: const WritingScreen(),
+        //home: const ProfileScreen(),
+        home: const LoginScreen(),
+        //home: initializedScreen,
         initialRoute: '/',
         routes: {
-          '/home': (context) => const HomeScaffold(),
+          '/home': (context) => const MainPageView(),
           '/write': (context) => const WritingScreen(),
           '/view': (context) => const WholeViewScreen(),
           '/calendar': (context) => const CalendarScreen(),

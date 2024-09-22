@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_body.dart';
+import 'package:frontend/utils/info_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileFreq extends StatefulWidget {
   VoidCallback onTap;
@@ -23,6 +25,8 @@ class _ProfileFreqState extends State<ProfileFreq> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height / 852;
     final double width = MediaQuery.of(context).size.width / 393;
+
+    final frequencyProvider = Provider.of<InfoProvider>(context);
 
     return Body(
       message: '일기를 매일 작성하지 않아도\n괜찮아요!',
@@ -97,6 +101,14 @@ class _ProfileFreqState extends State<ProfileFreq> {
                         onSelected: (bool selected) {
                           setState(() {
                             _value = selected ? index : null;
+                            int frequency = _value == 0
+                                ? 1
+                                : _value == 1
+                                    ? 3
+                                    : _value == 2
+                                        ? 5
+                                        : 7;
+                            frequencyProvider.saveFrequency(frequency);
                           });
                         },
                       ),

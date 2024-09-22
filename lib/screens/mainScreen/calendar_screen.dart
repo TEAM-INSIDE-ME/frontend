@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend/components/custom_dialog.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/last_month_report_screen.dart';
@@ -263,35 +264,64 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  child: Container(
-                                    child: const Text('머어쩌라구!'),
-                                  ),
+                            onTap: () {
+                              if (day.day == 19) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const Card();
+                                  },
                                 );
-                              },
-                            ),
+                              }
+                            },
                             child: MarbleBackground(
                               radius: 38,
                               // 구슬 색 임의로 지정 추후 수정
                               marble: day.day == 4
                                   ? Marble(
                                       marbleName: 'purple_marble_1',
+                                      radius: 38,
                                     )
                                   : day.day == 8
-                                      ? Marble(marbleName: 'green_marble_1')
+                                      ? Marble(
+                                          marbleName: 'red_marble_1',
+                                          radius: 38,
+                                        )
                                       : day.day == 9
-                                          ? Marble(marbleName: 'navy_marble_1')
+                                          ? Marble(
+                                              marbleName: 'navy_marble_1',
+                                              radius: 38,
+                                            )
                                           : day.day == 10
                                               ? Marble(
-                                                  marbleName: 'yellow_marble_1')
+                                                  marbleName: 'yellow_marble_1',
+                                                  radius: 38,
+                                                )
                                               : day.day == 13
                                                   ? Marble(
                                                       marbleName:
-                                                          'purple_marble_1')
-                                                  : Container(),
+                                                          'pink_marble_1',
+                                                      radius: 38,
+                                                    )
+                                                  : day.day == 17
+                                                      ? Marble(
+                                                          marbleName:
+                                                              'blue_marble_1',
+                                                          radius: 38,
+                                                        )
+                                                      : day.day == 18
+                                                          ? Marble(
+                                                              marbleName:
+                                                                  'green_marble_1',
+                                                              radius: 38,
+                                                            )
+                                                          : day.day == 19
+                                                              ? Marble(
+                                                                  marbleName:
+                                                                      'purple_marble_1',
+                                                                  radius: 38,
+                                                                )
+                                                              : Container(),
                             ),
                           ),
                           if (!isInLastRow) // 마지막 주는 divider 없음

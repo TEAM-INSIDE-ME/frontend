@@ -5,12 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/custom_dialog.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/mainScreen/home_scaffold.dart';
+import 'package:frontend/screens/mainScreen/main_page_view.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_password_input.dart';
 import 'package:frontend/screens/success.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:frontend/screens/profileScreen/profile_body.dart';
+import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePassword extends StatelessWidget {
@@ -155,13 +156,7 @@ class ProfilePassword extends StatelessWidget {
                         },
                         rtText: '확인',
                         rtTap: () {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const HomeScaffold(),
-                            ),
-                          );
+                          postUserInfo(context);
                         },
                       );
                     },

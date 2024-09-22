@@ -22,7 +22,7 @@ class _WholeViewScreenState extends State<WholeViewScreen> {
   bool _isFocused = false;
   String textContent = "";
   TextEditingController textController = TextEditingController();
-  int diary_cnt = 5; // 일기 갯수 초기화
+  int diary_cnt = 8; // 일기 갯수 초기화
   List<String> items = ['최신순', '날짜순', '북마크'];
   String onSelectedItem = '최신순';
 

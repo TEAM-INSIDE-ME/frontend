@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frontend/components/buttons.dart';
-import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/login_screen.dart';
-import 'package:frontend/screens/profileScreen/profile_password.dart';
-import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -246,7 +241,7 @@ class _ProfilePasswordInputAgainState extends State<ProfilePasswordInputAgain> {
                   if (enteredPin.length == 4) {
                     if (enteredPin == widget.correctPin) {
                       // 일치하면
-                      pwProvider.getPassword(enteredPin);
+                      pwProvider.savePassword(enteredPin);
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     } else {

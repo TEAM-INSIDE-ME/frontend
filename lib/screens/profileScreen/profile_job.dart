@@ -105,7 +105,7 @@ class _ProfileJobState extends State<ProfileJob> {
                     onSelected: (bool selected) {
                       setState(() {
                         _value = selected ? index : null;
-                        textProvider.getJob(jobs[index]);
+                        textProvider.saveJob(jobs[index]);
                       });
                     },
                   );

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/models/colors.dart';
@@ -17,7 +19,27 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // AnimationController 초기화 (1초마다 애니메이션 반복)
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2, microseconds: 500),
+      vsync: this,
+    )..repeat(reverse: true); // 애니메이션이 왔다 갔다 반복
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // 종료시 컨트롤러 해제
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height / 852;
@@ -68,89 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: 340 * height,
                   ),
-                  Positioned(
-                    top: 118 * height,
-                    left: 14 * width,
-                    right: 14 * width,
-                    child: Container(
-                      height: 57 * height,
-                      width: 363 * width,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: sub5),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: const Color.fromARGB(255, 157, 169, 204)
-                                .withOpacity(0.1),
-                            blurRadius: 4.0,
-                            spreadRadius: 0.0,
-                            offset: const Offset(0.0, 2.0),
-                            blurStyle: BlurStyle.inner,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              print('object');
-                              Navigator.push<void>(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      const WritingScreen(),
-                                ),
-                              );
-                            },
-                            child: MarbleBackground(
-                              radius: 45,
-                              marble: IconButton(
-                                onPressed: () {
-                                  // Navigator.push<void>(
-                                  //   context,
-                                  //   MaterialPageRoute<void>(
-                                  //     builder: (BuildContext context) =>
-                                  //         const WritingScreen(),
-                                  //   ),
-                                  // );
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: sub3,
-                                ),
-                              ),
-                            ),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                          MarbleBackground(
-                            radius: 45,
-                            marble: Container(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   Container(
                     height: 340 * height,
                     decoration: BoxDecoration(
@@ -161,9 +100,112 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  Positioned(
+                    top: 118 * height,
+                    left: 14 * width,
+                    right: 14 * width,
+                    child: AnimatedBuilder(
+                        animation: _controller,
+                        builder: (context, child) {
+                          // 그림자 효과 변화 계산
+                          double shadowStrength =
+                              sin(_controller.value * 2 * pi) * 4 +
+                                  8; // spread와 blur의 변화값
+                          return Container(
+                            height: 57 * height,
+                            width: 363 * width,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(color: sub5),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color:
+                                      const Color.fromARGB(255, 157, 169, 204)
+                                          .withOpacity(0.1),
+                                  //blurRadius: 4.0,
+                                  //spreadRadius: 0.0,
+                                  spreadRadius:
+                                      shadowStrength, // spread를 애니메이션에 맞춰 변화시킴
+                                  blurRadius: shadowStrength *
+                                      2, // blur를 애니메이션에 맞춰 변화시킴
+                                  offset: const Offset(0.0, 2.0),
+                                  blurStyle: BlurStyle.inner,
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: IconButton(
+                                    onPressed: () {
+                                      print('hihih');
+                                      Navigator.push<void>(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              const WritingScreen(),
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: sub3,
+                                    ),
+                                  ),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Marble(
+                                    marbleName: 'blue_marble_1',
+                                    radius: 45,
+                                  ),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Marble(
+                                    marbleName: 'green_marble_1',
+                                    radius: 45,
+                                  ),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Marble(
+                                    marbleName: 'purple_marble_1',
+                                    radius: 45,
+                                  ),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Marble(
+                                    marbleName: 'yellow_marble_1',
+                                    radius: 45,
+                                  ),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Container(),
+                                ),
+                                MarbleBackground(
+                                  radius: 45,
+                                  marble: Container(),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
                 ],
               ),
             ],
+          ),
+          Positioned(
+            top: 325 * height,
+            right: 0 * width,
+            left: 200 * width,
+            child: SvgPicture.asset('assets/images/bubble.svg'),
           ),
           Positioned(
             top: 365 * height,
@@ -176,24 +218,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 190 * height,
                   width: 190 * width,
                 ),
-                Container(
-                  width: 134 * width,
-                  height: 23 * height,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 178, 190, 225)
-                            .withOpacity(0.6),
-                        offset: const Offset(0, 0),
-                        blurRadius: 25,
-                        spreadRadius: 5,
-                        blurStyle: BlurStyle.normal,
-                      ),
-                    ],
-                  ),
-                ),
+                AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      // 그림자 효과 변화 계산
+                      double shadowStrength =
+                          sin(_controller.value * 2 * pi) * 2 + 6;
+                      // 물결처럼 일렁이는 효과 계산 (sin 함수를 이용)
+
+                      return Container(
+                        width: 134 * width,
+                        height: 23 * height,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(100),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 178, 190, 225)
+                                  .withOpacity(0.6),
+
+                              blurRadius:
+                                  shadowStrength * 8, // blur를 애니메이션에 맞춰 변화시킴
+                              blurStyle: BlurStyle.normal,
+                              spreadRadius: 15, // 그림자가 너무 넓게 퍼지지 않도록 설정
+
+                              offset: const Offset(0, 0), // 그림자 위치도 살짝 변하게 설정
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ],
             ),
           ),
@@ -203,6 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+// 홈 화면 배경입니다람쥐.
 class HomeBackground extends StatelessWidget {
   const HomeBackground({
     super.key,

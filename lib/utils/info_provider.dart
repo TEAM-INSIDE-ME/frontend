@@ -6,10 +6,9 @@ class InfoProvider extends ChangeNotifier {
   String remindTime = '';
   String password = '';
   late int frequency;
-  late int weeksOfConsecutiveSuccess;
   late int totalMinute;
   String gender = '';
-  late DateTime birth;
+  String birth = '';
   String job = '';
   String purpose = '';
   late String resolution = '';
@@ -27,33 +26,48 @@ class InfoProvider extends ChangeNotifier {
   // String get _purpose => purpose;
   String get _resulution => resolution;
 
-  void getName(String newName) {
+  void saveName(String newName) {
     name = newName;
     notifyListeners();
   }
 
-  void getGender(String newGender) {
+  void saveGender(String newGender) {
     gender = newGender;
     notifyListeners();
   }
 
-  void getBirth(DateTime newDay) {
-    birth = newDay;
+  void saveBirth(DateTime newDay) {
+    birth = newDay.toIso8601String();
     notifyListeners();
   }
 
-  void getJob(String newJob) {
+  void saveRemindTime(String newRemindTime) {
+    remindTime = newRemindTime;
+    notifyListeners();
+  }
+
+  void savePurpose(String newPurpose) {
+    purpose = newPurpose;
+    notifyListeners();
+  }
+
+  void saveJob(String newJob) {
     job = newJob;
     notifyListeners();
   }
 
-  void getPassword(String newPassword) {
+  void savePassword(String newPassword) {
     password = newPassword;
     notifyListeners();
   }
 
-  void getResolution(String newResolution) {
+  void saveResolution(String newResolution) {
     resolution = newResolution;
+    notifyListeners();
+  }
+
+  void saveFrequency(int newFrequency) {
+    frequency = newFrequency;
     notifyListeners();
   }
 }

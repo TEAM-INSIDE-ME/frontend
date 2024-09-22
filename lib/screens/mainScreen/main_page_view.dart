@@ -7,14 +7,14 @@ import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/mainScreen/calendar_screen.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 
-class HomeScaffold extends StatefulWidget {
-  const HomeScaffold({super.key});
+class MainPageView extends StatefulWidget {
+  const MainPageView({super.key});
 
   @override
-  State<HomeScaffold> createState() => _HomeScaffoldState();
+  State<MainPageView> createState() => _MainPageViewState();
 }
 
-class _HomeScaffoldState extends State<HomeScaffold>
+class _MainPageViewState extends State<MainPageView>
     with TickerProviderStateMixin {
   late PageController _pageViewController;
   late TabController _tabController;

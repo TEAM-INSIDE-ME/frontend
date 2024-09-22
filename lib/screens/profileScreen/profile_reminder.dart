@@ -6,6 +6,8 @@ import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:frontend/screens/profile_screen.dart';
+import 'package:frontend/utils/info_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileReminder extends StatefulWidget {
   VoidCallback onTap;
@@ -24,13 +26,13 @@ class _ProfileReminderState extends State<ProfileReminder> {
   DateTime date = DateTime.utc(2024, 1, 1, 22, 30);
   String isAmPm = 'PM';
 
-  ExpansionTileController controller = ExpansionTileController();
-  ExpansionTileController controller1 = ExpansionTileController();
-
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width / 393;
     final double height = MediaQuery.of(context).size.height / 852;
+
+    // remind 시간 Provider
+    final timeProvider = Provider.of<InfoProvider>(context);
 
     return Body(
         message: '\n잊지 않게 알려드릴게요',
@@ -149,6 +151,11 @@ class _ProfileReminderState extends State<ProfileReminder> {
                                                     date.hour < 12
                                                         ? isAmPm = 'AM'
                                                         : isAmPm = 'PM';
+                                                    // reminde time 저장
+                                                    String time =
+                                                        "${date.hour}:${date.minute}";
+                                                    timeProvider
+                                                        .saveRemindTime(time);
                                                   });
                                                 },
                                                 initialDateTime: DateTime.utc(
@@ -224,116 +231,6 @@ class _ProfileReminderState extends State<ProfileReminder> {
                             );
                           },
                         );
-                        // return Dialog(
-                        //   alignment: Alignment.center,
-                        //   child: Container(
-                        //     width: 284 * width,
-                        //     height: 184 * height,
-                        //     decoration: BoxDecoration(
-                        //       color: bg1,
-                        //       borderRadius: BorderRadius.circular(20),
-                        //     ),
-                        //     child: Padding(
-                        //       padding:
-                        //           const EdgeInsets.symmetric(vertical: 18.0),
-                        //       child: Column(
-                        //         mainAxisAlignment:
-                        //             MainAxisAlignment.spaceBetween,
-                        //         children: [
-                        //           const Padding(
-                        //             padding: EdgeInsets.only(
-                        //                 right: 16.0, left: 16.0, top: 27.0),
-                        //             child: Text(
-                        //               '알림을 설정하지 않으실 건가요?',
-                        //               style: TextStyle(
-                        //                 color: Colors.black,
-                        //                 fontSize: 18,
-                        //                 fontWeight: FontWeight.w600,
-                        //               ),
-                        //               textAlign: TextAlign.center,
-                        //             ),
-                        //           ),
-                        //           Text(
-                        //             '알림은 나중에 다시 설정할 수 있어요',
-                        //             style: TextStyle(
-                        //               color: sub3,
-                        //               fontSize: 13,
-                        //               fontWeight: FontWeight.w400,
-                        //             ),
-                        //             textAlign: TextAlign.center,
-                        //           ),
-                        //           Padding(
-                        //             padding: const EdgeInsets.only(
-                        //                 right: 18.0, left: 18.0, top: 20),
-                        //             child: Row(
-                        //               mainAxisAlignment:
-                        //                   MainAxisAlignment.spaceBetween,
-                        //               children: [
-                        //                 GestureDetector(
-                        //                   onTap: () {
-                        //                     Navigator.pop(context);
-                        //                   },
-                        //                   child: Container(
-                        //                     width: 119 * width,
-                        //                     height: 40 * height,
-                        //                     decoration: BoxDecoration(
-                        //                       color: sub4,
-                        //                       borderRadius:
-                        //                           BorderRadius.circular(10),
-                        //                     ),
-                        //                     child: const Center(
-                        //                       child: Text(
-                        //                         '취소',
-                        //                         style: TextStyle(
-                        //                           color: Colors.white,
-                        //                           fontSize: 16,
-                        //                           fontWeight: FontWeight.w600,
-                        //                         ),
-                        //                       ),
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //                 GestureDetector(
-                        //                   onTap: () {
-                        //                     Navigator.push<void>(
-                        //                       context,
-                        //                       MaterialPageRoute<void>(
-                        //                         builder:
-                        //                             (BuildContext context) =>
-                        //                                 const ProfileScreen(
-                        //                           initialIndex: 5,
-                        //                         ),
-                        //                       ),
-                        //                     );
-                        //                   },
-                        //                   child: Container(
-                        //                     width: 119 * width,
-                        //                     height: 40 * height,
-                        //                     decoration: BoxDecoration(
-                        //                       color: primary,
-                        //                       borderRadius:
-                        //                           BorderRadius.circular(10),
-                        //                     ),
-                        //                     child: const Center(
-                        //                       child: Text(
-                        //                         '확인',
-                        //                         style: TextStyle(
-                        //                           color: Colors.white,
-                        //                           fontSize: 16,
-                        //                           fontWeight: FontWeight.w600,
-                        //                         ),
-                        //                       ),
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
                       },
                     );
                   },

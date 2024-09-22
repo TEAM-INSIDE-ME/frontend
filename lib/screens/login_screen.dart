@@ -6,15 +6,17 @@ import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/custom_icons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
-import 'package:frontend/screens/mainScreen/home_scaffold.dart';
+import 'package:frontend/screens/mainScreen/main_page_view.dart';
 import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/screens/success.dart';
+import 'package:frontend/utils/info_provider.dart';
 import 'package:frontend/utils/login_platforms.dart';
 import 'package:frontend/utils/logout_service.dart';
 import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -165,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HomeScaffold()),
+                                  builder: (context) => const MainPageView()),
                               (route) => false,
                             );
                           }
@@ -218,8 +220,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ? await UserApi.instance.loginWithKakaoTalk()
           : await UserApi.instance.loginWithKakaoAccount();
 
-      final url =
-          Uri.parse('https://0a06-211-243-13-74.ngrok-free.app/api/user/kakao');
+      saveTokens(token.accessToken, token.refreshToken!);
+
+      final url = Uri.parse('http://localhost:8080/api/user/kakao');
 
       final headers = {
         HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}',
@@ -233,18 +236,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.statusCode == 200 || response.statusCode == 400) {
         User user = await UserApi.instance.me();
-        print('${user.kakaoAccount}');
-        print('카카오 로그인 성공!');
-        print(response.statusCode);
+        print(
+            '${user.kakaoAccount}\n카카오 로그인 성공! statusCode: ${response.statusCode}');
+        saveUserId(user.id.toString());
 
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SuccessScreen()));
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SuccessScreen()));
+            MaterialPageRoute(builder: (context) => const ProfileScreen()));
 
         return response.statusCode;
       } else {
-        print('서버 응답 오류: ${response.statusCode}');
+        print('서버 응답 오류: ${response.statusCode}\n ${response.body}');
         return response.statusCode;
       }
     } catch (error) {

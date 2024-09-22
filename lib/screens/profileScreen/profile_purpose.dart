@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:frontend/screens/profileScreen/profile_body.dart';
+import 'package:frontend/utils/info_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfileReason extends StatefulWidget {
+class ProfilePurpose extends StatefulWidget {
   VoidCallback onTap;
 
-  ProfileReason({
+  ProfilePurpose({
     super.key,
     required this.onTap,
   });
 
   @override
-  State<ProfileReason> createState() => _ProfileReasonState();
+  State<ProfilePurpose> createState() => _ProfilePurposeState();
 }
 
-class _ProfileReasonState extends State<ProfileReason> {
+class _ProfilePurposeState extends State<ProfilePurpose> {
   int? _value;
-  List<String> reasons = [
+  List<String> purpose = [
     '하루 기록',
     '감정 정리',
     '스트레스 해소',
@@ -31,6 +33,8 @@ class _ProfileReasonState extends State<ProfileReason> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width / 393;
     final double height = MediaQuery.of(context).size.height / 839;
+
+    final purposeProvider = Provider.of<InfoProvider>(context);
 
     return Body(
         message: 'Inside Me를\n이용하시는 이유가 궁금해요',
@@ -62,7 +66,7 @@ class _ProfileReasonState extends State<ProfileReason> {
                 child: Wrap(
                   direction: Axis.vertical,
                   spacing: 8,
-                  children: List<Widget>.generate(reasons.length, (index) {
+                  children: List<Widget>.generate(purpose.length, (index) {
                     return SizedBox(
                       width: 329 * width,
                       height: 49 * height,
@@ -73,7 +77,7 @@ class _ProfileReasonState extends State<ProfileReason> {
                           height: 49 * height,
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            reasons[index],
+                            purpose[index],
                             style: TextStyle(
                               color: _value == index ? sub1 : sub3,
                               fontSize: 16,
@@ -97,6 +101,7 @@ class _ProfileReasonState extends State<ProfileReason> {
                         onSelected: (bool selected) {
                           setState(() {
                             _value = selected ? index : null;
+                            purposeProvider.savePurpose(purpose[_value!]);
                           });
                         },
                       ),

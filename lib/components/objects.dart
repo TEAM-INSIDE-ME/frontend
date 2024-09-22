@@ -18,43 +18,45 @@ class MarbleBackground extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width / 393;
     final double height = MediaQuery.of(context).size.height / 839;
 
-    return Padding(
-      padding: const EdgeInsets.all(2.5),
-      child: Container(
-        padding: const EdgeInsets.all(0),
-        height: radius * height,
-        width: radius * width,
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(100),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-                color: Color.fromRGBO(157, 169, 204, 0.1),
-                blurRadius: 30.0,
-                spreadRadius: 2.5,
-                offset: Offset(0, 2.2),
-                blurStyle: BlurStyle.inner),
-          ],
-        ),
-        child: marble,
+    return Container(
+      padding: const EdgeInsets.all(0),
+      height: radius * height,
+      width: radius * width,
+      constraints: BoxConstraints.tight(Size(radius, radius)),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(100),
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+              color: Color.fromRGBO(157, 169, 204, 0.1),
+              blurRadius: 30.0,
+              spreadRadius: 2.5,
+              offset: Offset(0, 2.2),
+              blurStyle: BlurStyle.inner),
+        ],
       ),
+      child: marble,
     );
   }
 }
 
 class Marble extends StatelessWidget {
   String marbleName;
+  int radius;
 
   Marble({
     super.key,
     required this.marbleName,
+    required this.radius,
   });
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/images/marbles/$marbleName.png',
-      //scale: 2,
+      width: radius.toDouble(),
+      height: radius.toDouble(),
+      //scale: 15,
     );
   }
 }

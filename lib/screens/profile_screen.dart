@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
-import 'package:frontend/screens/mainScreen/home_scaffold.dart';
+import 'package:frontend/screens/mainScreen/main_page_view.dart';
 import 'package:frontend/screens/mainScreen/home_screen.dart';
 import 'package:frontend/screens/profileScreen/profile_frequency.dart';
 import 'package:frontend/screens/profileScreen/profile_job.dart';
@@ -9,9 +9,10 @@ import 'package:frontend/screens/profileScreen/profile_birth.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/objects.dart';
 import 'package:frontend/screens/profileScreen/profile_password.dart';
-import 'package:frontend/screens/profileScreen/profile_reason.dart';
+import 'package:frontend/screens/profileScreen/profile_purpose.dart';
 import 'package:frontend/screens/profileScreen/profile_reminder.dart';
 import 'package:frontend/utils/info_provider.dart';
+import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -112,6 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 0
                             ? Marble(
                                 marbleName: 'red_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -120,6 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 1
                             ? Marble(
                                 marbleName: 'orange_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -128,6 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 2
                             ? Marble(
                                 marbleName: 'yellow_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -136,6 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 3
                             ? Marble(
                                 marbleName: 'green_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -144,6 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 4
                             ? Marble(
                                 marbleName: 'blue_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -152,6 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 5
                             ? Marble(
                                 marbleName: 'navy_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -160,6 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         marble: _selectedIndex >= 6
                             ? Marble(
                                 marbleName: 'purple_marble_1',
+                                radius: 38,
                               )
                             : Container(),
                       ),
@@ -194,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ProfileJob(
               onTap: _goToNextPage,
             ),
-            ProfileReason(
+            ProfilePurpose(
               onTap: _goToNextPage,
             ),
             ProfileReminder(
@@ -205,11 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ProfilePassword(
               onTap: () {
-                Navigator.push<void>(
-                  context,
-                  MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const HomeScaffold()),
-                );
+                postUserInfo(context);
               },
             ),
           ],

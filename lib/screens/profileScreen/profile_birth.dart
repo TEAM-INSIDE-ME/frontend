@@ -30,7 +30,7 @@ class _BirthState extends State<ProfileBirth> {
   var tap = false; //한 번 열었는지
   var isPopup = false; // 열려 있는지
 
-  DateTime date = DateTime.now();
+  DateTime date = DateTime(2002, 01, 01);
   int _lastYear = DateTime.now().year;
   int _lastMonth = DateTime.now().month;
   int _lastDay = DateTime.now().day;
@@ -150,7 +150,7 @@ class _BirthState extends State<ProfileBirth> {
                           onSelected: (bool selected) {
                             setState(() {
                               _value = selected ? index : null;
-                              genderProvider.getGender(genders[_value!]);
+                              genderProvider.saveGender(genders[_value!]);
                             });
                           },
                         ),
@@ -209,6 +209,7 @@ class _BirthState extends State<ProfileBirth> {
                       setState(() {
                         isPopup = true;
                         tap = true;
+                        dayProvider.saveBirth(date);
                       });
                       await showCupertinoModalPopup<bool>(
                         context: context,
@@ -230,7 +231,7 @@ class _BirthState extends State<ProfileBirth> {
                                 onDateTimeChanged: (DateTime selectedTime) {
                                   setState(() {
                                     _onDateChanged(selectedTime);
-                                    dayProvider.getBirth(date);
+                                    dayProvider.saveBirth(date);
                                   });
                                 },
                               ),
