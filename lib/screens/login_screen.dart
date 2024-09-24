@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/buttons.dart';
 import 'package:frontend/components/custom_icons.dart';
+import 'package:frontend/main.dart';
 import 'package:frontend/models/colors.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:frontend/screens/mainScreen/main_page_view.dart';
@@ -222,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       saveTokens(token.accessToken, token.refreshToken!);
 
-      final url = Uri.parse('http://localhost:8080/api/user/kakao');
+      final url = Uri.parse('$forwardUrl/api/user/kakao');
 
       final headers = {
         HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}',

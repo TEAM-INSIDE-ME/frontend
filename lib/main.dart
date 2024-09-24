@@ -7,6 +7,7 @@ import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/screens/whole_view_screen.dart';
 import 'package:frontend/screens/writingScreen/writing_screen.dart';
+import 'package:frontend/services/diary_service.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -48,6 +49,9 @@ Future<Widget> _tokenStatus() async {
     return const LoginScreen();
   }
 }
+
+String forwardUrl = 'http://localhost:8080';
+int cnt = 16;
 
 class InsideMe extends StatelessWidget {
   Widget initializedScreen;

@@ -3,22 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/colors.dart';
 
 class LastMonthReportScreen extends StatelessWidget {
-  LastMonthReportScreen({super.key});
-  final List<String> images = [
-    "assets/images/character_0.png",
-    "assets/images/character_1.png",
-    "assets/images/character_2.png",
-    "assets/images/character_3.png",
-    "assets/images/logo.png",
-  ];
-
-  List<String> titles = [
-    'Flutter Swiper is awesome',
-    'Really nice',
-    'Yeah',
-    'hi',
-    'gooredar',
-  ];
+  const LastMonthReportScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,10 @@ import 'package:flutter/widgets.dart';
 import 'package:frontend/components/custom_dialog.dart';
 import 'package:frontend/components/diary_preview_card.dart';
 import 'package:frontend/models/colors.dart';
+import 'package:frontend/models/diary.dart';
 import 'package:frontend/screens/writingScreen/writing_screen.dart';
+import 'package:frontend/services/diary_service.dart';
+import 'package:frontend/utils/user_auth_manager.dart';
 import 'package:http/http.dart';
 
 class WholeViewScreen extends StatefulWidget {
@@ -22,13 +25,16 @@ class _WholeViewScreenState extends State<WholeViewScreen> {
   bool _isFocused = false;
   String textContent = "";
   TextEditingController textController = TextEditingController();
-  int diary_cnt = 8; // 일기 갯수 초기화
+  late Future<List<Diary>> diaries;
+
   List<String> items = ['최신순', '날짜순', '북마크'];
   String onSelectedItem = '최신순';
 
   @override
   void initState() {
     super.initState();
+    diaries = DiaryService().fetchDiaries();
+
     _focusNode.addListener(_onFocusChange);
   }
 
@@ -73,13 +79,39 @@ class _WholeViewScreenState extends State<WholeViewScreen> {
               children: [
                 Column(
                   children: [
-                    Text(
-                      '$diary_cnt개의 일기',
-                      style: TextStyle(
-                        color: sub1,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    FutureBuilder<List<Diary>>(
+                      future: diaries,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text(
+                            '로딩 중...',
+                            style: TextStyle(
+                              color: sub1,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          return Text(
+                            '${snapshot.data!.length}개의 일기',
+                            style: TextStyle(
+                              color: sub1,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            '일기를 불러올 수 없습니다',
+                            style: TextStyle(
+                              color: sub1,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     Container(
                       height: 25,
@@ -172,14 +204,28 @@ class _WholeViewScreenState extends State<WholeViewScreen> {
           color: sub3,
         ),
       ),
-      body: ListView.builder(
-        itemCount: diary_cnt,
-        shrinkWrap: false,
-        itemBuilder: (context, index) {
-          return DiaryPreviewCard(id: index);
-        },
-        // padding: const EdgeInsets.all(10),
-      ),
+      body: FutureBuilder<List<Diary>>(
+          future: diaries,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else if (snapshot.hasData) {
+              final diaries = snapshot.data!;
+              return ListView.builder(
+                itemCount: diaries.length,
+                shrinkWrap: false,
+                itemBuilder: (context, index) {
+                  return DiaryPreviewCard(id: index, data: diaries);
+                },
+              );
+            } else {
+              return const Center(child: Text('No diaries available'));
+            }
+          }),
     );
   }
 

@@ -99,6 +99,9 @@ class _ProfileReminderState extends State<ProfileReminder> {
                                 setState(() {
                                   toggled = value;
                                   _isExpanded = !_isExpanded;
+                                  toggled
+                                      ? timeProvider.saveRemindTime("22:30")
+                                      : timeProvider.saveRemindTime('');
                                 });
                               },
                             ),

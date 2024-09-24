@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:frontend/main.dart';
 import 'package:frontend/screens/mainScreen/main_page_view.dart';
 import 'package:frontend/utils/info_provider.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +32,7 @@ Future<void> deleteTokens() async {
 
 // access token 재발급
 Future<bool> refreshAccessToken() async {
-  String url = 'http://localhost:8080/api/user/kakao';
+  String url = '$forwardUrl/user/kakao';
   try {
     String? refreshToken = await getRefreshToken();
     if (refreshToken == null) {
@@ -77,28 +78,28 @@ Future<String?> getUserId() async {
 Future<void> postUserInfo(BuildContext context) async {
   String? userId = await getUserId();
   String? accessToken = await getAccesToken();
-  print(accessToken);
+  print("accessToken");
   String? refreshToken = await getRefreshToken();
-  Uri url = Uri.parse('http://localhost:8080/api/user/initUser')
+  Uri url = Uri.parse('$forwardUrl/api/user/initUser')
       .replace(queryParameters: {'user_id': '$userId'});
   var userInfo = Provider.of<InfoProvider>(context, listen: false);
   print(accessToken);
   print(userId);
   try {
-    // print(userInfo.name);
-    // print(userInfo.remindTime);
-    // print(userInfo.password);
-    // print(userInfo.frequency);
-    // print(userInfo.gender);
-    // print(userInfo.birth);
-    // print(userInfo.job);
-    // print(userInfo.purpose);
+    print(userInfo.name);
+    print(userInfo.remindTime);
+    print(userInfo.password);
+    print(userInfo.frequency);
+    print(userInfo.gender);
+    print(userInfo.birth);
+    print(userInfo.job);
+    print(userInfo.purpose);
 
     var response = await http.post(
       url,
       headers: {
-        HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-        HttpHeaders.contentTypeHeader: 'application/json',
+        //HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
         "name": userInfo.name,
@@ -128,4 +129,12 @@ Future<void> postUserInfo(BuildContext context) async {
   } catch (e) {
     print('error: $e');
   }
+}
+
+Future<void> saveDiaryCnt(int diaryCnt) async {
+  await _storage.write(key: 'diary_cnt', value: diaryCnt.toString());
+}
+
+Future<String?> getDiaryCnt() async {
+  return await _storage.read(key: 'diary_cnt');
 }
